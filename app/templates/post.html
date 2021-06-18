@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action="" method="get">
+    <div class="form-group">
+        <p class="text-info"><span class="text-danger">Adm:</span> {{ var.session_name }}</p>
+        <p class="text-info"><span class="text-danger"> Sessão: </span> {{ var.session_hash }}</p>
+        <p class="text-info"><span class="text-danger">Expira:</span> {{ var.session_expire }}</p>
+        <button class="btn btn-primary">Fazer logoff</button>
+    </div>
+</form>
+{% endblock %}

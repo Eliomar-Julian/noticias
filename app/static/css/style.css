@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+/* ------------- tela de login ----------- */
+
+input[class=form-control]{
+    margin-top: 1%;
+}
+.form-login {
+    width: 40vw;
+    margin: auto;
+}
+.btn.btn-success.btn-lg {
+    margin-top: 1%;
+}
+.rounded.mx-auto.d-block{
+    margin-top: 2%;
+}
+[data-message]{
+    visibility: hidden;
+}
