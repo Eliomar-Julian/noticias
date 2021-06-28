@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
+{# pagina que renderiza a pagina de login #}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <form class="form-login">
+    <form class="form-login" method="POST">
         <img width="80" height="80" src="{{ url_for('static', filename='img/password.png') }}" class="rounded mx-auto d-block" alt="">
         <h4 class="h4 text-center text-primary">Faça login</h4>
         <div class="form-group text-center">
@@ -10,8 +11,8 @@
             <input type="password" class="form-control" placeholder="Senha" name="password">
             <p class="text-danger" data-message="error-password">Senha incorreta!</p>
             <input type="checkbox" class="form-check-input" id="connected" name="connected" value="1">
-            <label for="connected" class="form-check-label">Mantenha-me conectado</label><br>
-            <button class="btn btn-success btn-lg" id="btn-login">Acessar</button>
+            <label for="connected" class="form-check-label">Desconectar-me</label><br>
+            <button class="btn btn-success btn-lg" id="btn-login" type="submit">Acessar</button>
         </div>
     </form>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

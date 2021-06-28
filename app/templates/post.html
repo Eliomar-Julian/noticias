@@ -1,11 +1,77 @@
 {% extends 'base.html' %}
+{# ---------------------- pagina de postagem ------------------------- #}
 {% block body %}
-<form action="" method="get">
-    <div class="form-group">
-        <p class="text-info"><span class="text-danger">Adm:</span> {{ var.session_name }}</p>
-        <p class="text-info"><span class="text-danger"> Sessão: </span> {{ var.session_hash }}</p>
-        <p class="text-info"><span class="text-danger">Expira:</span> {{ var.session_expire }}</p>
-        <button class="btn btn-primary">Fazer logoff</button>
+<div class="main">
+    <div data-header="content">
+        <div class="btn btn-outline-info" data-header="cols">Usuários</div>
+        <div class="btn btn-info" data-header="cols">Postagens</div>
+        <div class="btn btn-info" data-header="cols">Gerenciar postagens</div>
     </div>
-</form>
+    <div data-header="window">
+        <div  data-item="user" style="display: block;">
+            <h1 class="h3 text-danger text-center">Usuários</h1>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <p class="text-info"><span class="text-danger">Logado como:</span> {{ var.session_name }}</p>
+                    <p class="text-info"><span class="text-danger"> Token: </span> {{ var.session_hash }}</p>
+                    <p class="text-info"><span class="text-danger">Expirar sessão:</span> 
+                        {{ var.session_expire|replace('false', 'Não')|replace('true', 'Sim') }}
+                    </p>
+                    <p class="text-info"><span class="text-danger">Dispositivos logados:</span> {{ var.session_actives }}</p>
+                    <button class="btn btn-primary" name="logoff" value="exit" type="submit">Deslogar esse administrador</button>
+                    <button class="btn btn-secondary" name="logoff" value="exit-all" type="submit">Deslogar todos os administradores</button>
+                </div>
+            </form>
+        </div>
+        <div  data-item="post" style="display: none;">
+            <p class="h2 text-center text-info text-danger"> Nova Postagem</p>
+            <form method="POST" id="post" enctype="multipart/form-data">
+                <input type="date" name="date" required>
+                <label for="author" class="text-info">Autor</label>
+                <input type="text" name="author" id="author" value="{{ var.session_name }}"><br>
+                <label for="category" class="text-info">selecione a categoria da postagem</label>
+                <select name="category" id="category" class="form-control">
+                    {# opçoes renderizadas dinamicamente com java script apartir do menu #}
+                </select>
+                <input type="text" name="title" placeholder="titulo" class="form-control" required>
+                <label for="text" class="text-info">Escreva a matéria abaixo
+                    <span class="text-danger">use html para linkar imagens e vídeos</span> 
+                </label>
+                <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea>
+                <div class="form-control">
+                    <label class="text-info">Atalhos</label><br>
+                    <button class="btn btn-secondary" title="Adicionar link" type="button" data-tool1>
+                        <img src="{{ url_for('static', filename='img/add_link_white_24dp.svg')}}" alt="add_link_white_24dp">
+                        <div class="btn btn-secondary" style="display: none;" data-tool1="div">
+                            <label class="text-info">Face:</label>
+                            <input type="text" name="too1-face">
+                            <label class="text-info">link:</label> 
+                            <input type="text" name="too1-link">
+                            <input class="btn btn-primary" type="button" id="too1" value="ok">
+                        </div>
+                    </button>
+                    <button class="btn btn-secondary" title="Adicionar imagem externa" type="button" data-tool2>
+                        <img src="{{ url_for('static', filename='img/image_white_24dp.svg')}}" alt="add_link_white_24dp">
+                    </button>
+                    <button class="btn btn-secondary" title="Quebra linha" type="button" data-tool3>
+                        <img src="{{ url_for('static', filename='img/keyboard_return_white_24dp.svg')}}" alt="add_link_white_24dp">
+                    </button>
+                    <button class="btn btn-secondary" title="Espaço" type="button" data-tool4>
+                        <img src="{{ url_for('static', filename='img/space_bar_white_24dp.svg')}}" alt="add_link_white_24dp">
+                    </button>
+                </div>
+                <input type="file" name="image">
+                &nbsp;&nbsp;<label class="text-info text-danger"for=""> ou link uma imagem da internet</label>
+                <input type="text" name="link-image" placeholder="Cole o link aqui">
+                <input type="button" value="Postar" class="btn btn-primary" id="posting">
+                <input type="reset" value="Limpar" class="btn btn-secondary">
+            </form>
+        </div>
+        <div  data-item="manager" style="display: none;">Gerenciar postagens</div>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/post2.js') }}"></script>
+<script src="{{ url_for('static', filename='js/post.js') }}"></script>
 {% endblock %}

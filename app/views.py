@@ -2,6 +2,10 @@ from flask import Flask, render_template, jsonify
 from flask import request, redirect, url_for
 from .models import *
 import hashlib
+import threading
+from time import sleep
+from werkzeug.utils import secure_filename
+import os
 
 DATABASE = SQL()
 
@@ -14,6 +18,32 @@ def create_app():
         template_folder="templates"
     )
     return app
+
+
+# // pagina inicial
+
+
+def home_():
+    cur = DATABASE.personal()
+    cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 50;")
+    return render_template("ultimas.html", var=cur.fetchall())
+
+
+
+def open_page_category(category):
+    cur = DATABASE.personal()
+    cur.execute("SELECT * FROM noticias WHERE categoria = ?;", [category,])
+    return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
+
+
+# // expira a sessão...
+
+
+def expire(args):
+    timer = 3600
+    for t in range(timer): 
+        timer -= 1; sleep(1)
+    DATABASE.delete_table("sessions", "sessions_hash", args)
 
 
 # gerador de hashs md5
@@ -57,9 +87,17 @@ def login():
                     "sessions_permanent"
                 ], 
                     [
-                        name, user_session_finnaly, expires
+                        name, 
+                        user_session_finnaly, 
+                        expires
                     ]
             )
+            if expires == "true": 
+                threading.Thread(
+                    target=expire, 
+                    daemon=True, args=[
+                                    user_session_finnaly
+                                ]).start()
             return jsonify(message="success", session=user_session_finnaly)
     try:
         if user_session_finnaly == is_logon[1]:
@@ -73,15 +111,72 @@ def login():
 
 def login_on(session):
     yes = DATABASE.get_table_data("sessions", "sessions_hash", session)
+    if request.method == "POST":
+        exit_ = request.form.get("logoff")
+        date = request.form.get("date")
+        author = request.form.get("author")
+        category = request.form.get("category")
+        title = request.form.get("title")
+        text = request.form.get("text")
+        photos = request.files.get("image")
+        link_image = request.form.get("link-image")
+        save_base = os.path.dirname(__file__)
+        save_file = os.path.join(save_base, "static/img/upload")
+        try:
+            photo = photos.filename
+            photos.save(f"{save_file}/{secure_filename(photo)}")
+        except : 
+            photo = link_image
+
+
+        if exit_ == "exit": # se sair for clicado...
+            DATABASE.delete_table("sessions", "sessions_hash", yes[1])
+            return redirect("/admin")
+        elif exit_ == "exit-all": # deslogar todos os administradores
+            DATABASE.delete_all("sessions")
+            return redirect("/admin") 
+
+        if title: # se o formulario de postagem estiver preenchido 
+            DATABASE.insert_in_table(
+                "noticias", (
+                    "data", "autor", "categoria", "titulo", "materia", "foto"), 
+                    (date, author, category, title, text, photo)
+            )
+            return redirect(f"/{category}/{title}")
     try:
+        active = DATABASE.get_table_data(
+            "sessions", "sessions_name", 
+            yes[0], True
+        )
         if yes[1] == session:
             return render_template(
                 "post.html", 
                 var={
                     "session_name": yes[0], 
                     "session_hash": yes[1], 
-                    "session_expire":yes[2]
+                    "session_expire":yes[2],
+                    "session_actives": len(active)
                 }
             )
     except Exception as e:
-        return "Postagem não autorizada"
+        return "Sessão expirada ou token invalido"
+
+
+# // buscando noticias no banco de dados....
+
+
+def query_news(category: str=None, title: str=None):
+    data = DATABASE.get_table_data("noticias", "titulo", title)
+    outer = DATABASE.get_table_data("noticias", "categoria", category)
+    return render_template(
+        "page.html", var={
+            "id": data[0], 
+            "date": data[1],
+            "author": data[2], 
+            "category": data[3], 
+            "title": data[4], 
+            "text": data[5],
+            "photos": data[6],
+            "outer": outer
+        }
+    )

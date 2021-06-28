@@ -1,33 +1,49 @@
 <!DOCTYPE html>
+{# pagina base que contem o menu e as linkages de css, bootstrap e javascript #}
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 <header>
     <script src="{{ url_for('static', filename='jquery/dist/jquery.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/dist/css/bootstrap.min.css') }}" type="text/css">
-    <nav class="navbar navbar-light bg-danger">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <div class="logo" id="logo">
+      <a href="/"><img src="{{ url_for('static', filename='img/desenho.png') }}" alt="logo" title="Fatimense Notícias" id="logotipo"></a>
+      <a href="/"><img class="social" src="{{ url_for('static', filename='img/face.jpg') }}" alt="face" title="Facebook" id="face-link"></a>
+      <a href="/"><img class="social" src="{{ url_for('static', filename='img/twitter.jpg') }}" alt="twitter" title="Twiter" id="twitter-link"></a>
+      <a href="/"><img class="social" src="{{ url_for('static', filename='img/youtube.jpg') }}" alt="youtube" title="Youtube" id="youtube-link"></a>
+    </div>
+    <nav class="navbar navbar-light bg-danger" id="navbar">
         <div class="container-fluid">
-          <a href="#" class="navbar-brand text-light">Últimas notícias</a>
-          <a href="#" class="navbar-brand text-light">Esporte</a>
-          <a href="#" class="navbar-brand text-light">Política</a>
-          <a href="#" class="navbar-brand text-light">Polícia</a>
-          <a href="#" class="navbar-brand text-light">Curiosidades</a>
-          <a href="#" class="navbar-brand text-light">Contato</a>
+          <a href="/" data-menu="item" class="navbar-brand text-light">Últimas notícias</a>
+          <a href="/esporte" data-menu="item" class="navbar-brand text-light">Esporte</a>
+          <a href="/educacao"  data-menu="item" class="navbar-brand text-light">Educação</a>
+          <a href="/gastronomia" data-menu="item" class="navbar-brand text-light">Gastronomia</a>
+          <a href="/lazer" data-menu="item" class="navbar-brand text-light">Lazer</a>
+          <a href="/politica" data-menu="item" class="navbar-brand text-light">Política</a>
+          <a href="/agronegocio" data-menu="item" class="navbar-brand text-light">Agro</a>
+          <a href="/policia" data-menu="item" class="navbar-brand text-light">Polícia</a>
+          <a href="/curiosidades" data-menu="item" class="navbar-brand text-light">Curiosidades</a>
+          <a href="/contato" data-menu="item" class="navbar-brand text-light">Contato</a>
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-success" type="button">Search</button>
           </form>
         </div>
-      </nav>    
+    </nav>    
 </header>
 <body>
 {% block body %}
     {# --------corpo da pagina ----------------------- #}
 {% endblock %}
+<div style="height: 1000pt;"></div>
+<div name="go-top" class="btn bg-warning" style="width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; position: fixed; bottom: 5%; right: 5%;">
+  <p class="h5 text-center text-primary">TOPO</p>
+</div>
 <script src="{{ url_for('static', filename='bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

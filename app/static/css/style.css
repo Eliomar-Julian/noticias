@@ -1,5 +1,60 @@
 @charset "utf-8";
 
+/*---------------- menu ------------- */
+
+#logo{
+    width: max-content;
+    background-color:transparent;
+    padding-left: 1%;
+    display: flex;
+    align-items: center;
+
+}
+#logotipo{
+    width: 100px;
+    height: 50px;
+}
+.social{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    padding-left: 1%;
+}
+[data-article=article]{
+    word-wrap: break-word;
+}
+
+/* ----------ultimas -----------------------*/
+#first-post{
+    width: 98%;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+#first-post [data-article=article]{
+    font-size: 10pt;
+}
+[data-article="article"]{
+    font-size: 8pt;
+}
+[data-h1]{
+    background-color: white;
+    border-radius: 5px;
+    padding: 1%;
+}
+#content{
+    width: 98%;
+    background-color: transparent;
+    margin: auto;
+    margin-top: 7%;
+}
+[data-sub=div]{
+    width: 20vw;
+    float: left;
+    color: black;
+    border-collapse: collapse;
+}
+
 /* ------------- tela de login ----------- */
 
 input[class=form-control]{
@@ -8,6 +63,7 @@ input[class=form-control]{
 .form-login {
     width: 40vw;
     margin: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .btn.btn-success.btn-lg {
     margin-top: 1%;
@@ -17,4 +73,86 @@ input[class=form-control]{
 }
 [data-message]{
     visibility: hidden;
+}
+
+/* ---------formulario de postagem ---------------- */
+body{
+    margin: 0px;
+    padding: 0px;
+}
+[data-header=content]{
+    width: 100vw;
+    margin: auto;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+[data-header=cols]{
+    margin: auto;
+    width: 100%;
+    border-radius: 0px;
+    border: 1px solid black;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+[data-header=window]{
+    width: 80vw;
+    height: 60vh;
+    border-top: none;
+    margin: auto;
+    display: block;
+    align-items: center;
+    border-collapse: collapse;
+}
+.form-group{
+    width: 80%;
+    margin: auto;
+    background-color:transparent;
+    text-align: center;
+    border-radius: 5px;
+    padding: 2%;
+}
+input[type=date]{
+    margin-right: 1%;
+}
+label{
+    margin-top: 1%;
+}
+#post{
+    width: 100%;
+}
+
+
+/* -------paginas individuais -------------------- */
+.posts{
+    width: 70%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+#photos{
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+[data-s]{
+    width: 15vw;
+    height: 14vh;
+    margin: auto;
+    padding: 2%;
+}
+[data-f]{
+    width: 70%;
+    height: 70%;
+}
+[data-page]{
+    width: 80%;
+    margin: auto;
+}
+iframe{
+    margin: auto;
+}
+article img{
+    width: 90%;
+    margin: auto;
 }

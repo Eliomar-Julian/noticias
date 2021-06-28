@@ -1,13 +1,14 @@
 import sqlite3
 import typing
+import os
 
 
 class SQL:
     def __init__(self):
-        self.conn = sqlite3.connect(
-            "app/db/database.db", 
-            check_same_thread=False
-        )
+        path = os.path.realpath(os.path.dirname(__file__))
+        path_full = os.path.join(path, "db/database.db")
+        print("PASTA___________________" + path_full)
+        self.conn = sqlite3.connect(path_full, check_same_thread=False)
         self.cursor = self.conn.cursor()
 
     # // cria qualquer tabela
@@ -27,9 +28,11 @@ class SQL:
     
     # // insere em qualquer tabela ja criada...
     
-    def insert_in_table(self, table: str, 
-        cols: typing.Iterable=list() or tuple(), 
-        values: typing.Iterable=list() or tuple()):
+    def insert_in_table(
+        self, table: str, 
+        cols: typing.Iterable=list(), 
+        values: typing.Iterable=list()
+        ):
         sintaxe = f"INSERT INTO {table} {cols} VALUES {values};".replace(
             "[", "(").replace("]", ")"
         )
@@ -38,10 +41,30 @@ class SQL:
 
     # // busca valores especificos em qualquer campo
 
-    def get_table_data(self, table: str, 
-    col_name: str, value: str, all: bool=False):
+    def get_table_data(
+        self, table: str, 
+        col_name: str, value: str, 
+        all: bool=False, 
+        order: str = str()):
         select = self.cursor.execute(
-            f"SELECT * FROM {table} WHERE {col_name} = ?;", [value,]
+            f"SELECT * FROM {table} WHERE {col_name} = ?;", 
+            [value,]
         )
         if all: return select.fetchall()
         else: return select.fetchone()
+
+
+    def delete_table(self, table: str, cols: str, items: str):
+        self.cursor.execute(
+            f"DELETE FROM {table} WHERE {cols} = ?;", [items,]
+        )
+        self.conn.commit()
+
+
+    def delete_all(self, table: str):
+        self.cursor.execute(f"DELETE FROM {table};")
+        self.conn.commit()
+
+
+    def personal(self):
+        return self.cursor
