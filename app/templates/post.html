@@ -67,10 +67,43 @@
                 <input type="reset" value="Limpar" class="btn btn-secondary">
             </form>
         </div>
-        <div  data-item="manager" style="display: none;">Gerenciar postagens</div>
+        <div  data-item="manager" style="display: none;">
+            <h1 class="h2 text-danger text-center">Gerenciar postagens</h1>
+            <div class="content-posts">
+                <ol>
+                    {% for info in var.session_data %}
+                        <li data-editor onclick="editor(this)">
+                            <p class="btn btn-outline-info">
+                                <span class="text-danger text-center"> data:</span>{{ info.1 }} <br> 
+                                <span class="text-danger">titulo:</span> {{info.4}}...<br>
+                                <button type="button" data-alter-btn class="btn btn-secondary btn-sm">Remover</button>
+                                <input type="hidden" name="id" value="{{ info.0 }}">
+                                <input type="hidden" name="category" value="{{ info.3 }}">
+                                <input type="hidden" name="title" value="{{ info.4 }}">
+                                <input type="hidden" name="post" value="{{ info.5 }}">
+                                <input type="hidden" name="image" value="{{ info.6 }}">
+                            </p>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+
+        </div>
     </div>
 </div>
-
+<style>
+    [data-editor] p{
+        width: 50vw;
+        margin: auto;
+        padding: 1%;
+        margin: 2px;
+        text-align: left;
+        height: 20vh;
+    }
+    [data-alter-btn]{
+        float: right;
+    }
+</style>
 
 <script src="{{ url_for('static', filename='js/post2.js') }}"></script>
 <script src="{{ url_for('static', filename='js/post.js') }}"></script>

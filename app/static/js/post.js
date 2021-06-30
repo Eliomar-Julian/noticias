@@ -25,12 +25,8 @@ let texto = document.querySelector("[name=text]");
 let aberto = false;
 let emptyText = new String();
 pst.addEventListener("click", (e) => {
-    for(var i=0;i<texto.value.length;i++){
-        if(texto.value[i] !== "\n"){
-            emptyText += texto.value[i];
-        }
-    }
-    texto.value = emptyText.replace("\\n", "<br>");
+    emptyText = texto.value.replace(/\n/g, "")
+    texto.value = emptyText;
     pst.setAttribute("type", "submit");
 })
 tool1.addEventListener("click", revela);

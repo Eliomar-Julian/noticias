@@ -2,6 +2,19 @@
 
 /*---------------- menu ------------- */
 
+[data-menu]:hover{
+    color: #E92049;
+    transition: ease-in-out 0.5s;
+    background-color: rgba(255, 255, 255, 0.272);
+    padding: 2px;
+}
+[data-menu]{
+    transition: 1s;
+}
+[data-menu]:visited{
+    background-color: rgba(255, 255, 255, 0.272);
+}
+
 #logo{
     width: max-content;
     background-color:transparent;
@@ -25,11 +38,17 @@
 }
 
 /* ----------ultimas -----------------------*/
+[data-sub]{
+    border-collapse: collapse;
+}
+[data-sub] h1{
+    border-collapse: collapse;
+}
 #first-post{
-    width: 98%;
+    width: 60vw;
+    height: auto;
     background-color: transparent;
     border-radius: 5px;
-    border: 1px solid gray;
 }
 #first-post [data-article=article]{
     font-size: 10pt;
@@ -52,6 +71,7 @@
     width: 20vw;
     float: left;
     color: black;
+    height: 45vh;
     border-collapse: collapse;
 }
 
@@ -80,6 +100,7 @@ body{
     margin: 0px;
     padding: 0px;
 }
+
 [data-header=content]{
     width: 100vw;
     margin: auto;
@@ -128,31 +149,39 @@ label{
     width: 70%;
     margin: auto;
     margin-top: 10%;
+    text-align: left;
+    display: block;
+    align-items: center;
 }
 
 #photos{
-    width: 50%;
+    width: 30vw;
     height: auto;
     margin: auto;
 }
 [data-s]{
-    width: 15vw;
-    height: 14vh;
+    width: 100%;
+    height: 10vw;
     margin: auto;
     padding: 2%;
 }
 [data-f]{
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: auto;
+    margin: auto;
+
 }
 [data-page]{
-    width: 80%;
+    width: 70%;
     margin: auto;
 }
 iframe{
     margin: auto;
 }
 article img{
-    width: 90%;
+    width: 50%;
+    float: left;
+    height: auto;
     margin: auto;
+    padding: 1%;
 }

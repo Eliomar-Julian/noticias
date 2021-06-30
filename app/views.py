@@ -111,6 +111,10 @@ def login():
 
 def login_on(session):
     yes = DATABASE.get_table_data("sessions", "sessions_hash", session)
+    cur = DATABASE.personal()
+    data = cur.execute("SELECT * FROM noticias ORDER BY id DESC;")
+    d = data.fetchall()
+    print(data.fetchall())
     if request.method == "POST":
         exit_ = request.form.get("logoff")
         date = request.form.get("date")
@@ -155,7 +159,8 @@ def login_on(session):
                     "session_name": yes[0], 
                     "session_hash": yes[1], 
                     "session_expire":yes[2],
-                    "session_actives": len(active)
+                    "session_actives": len(active),
+                    "session_data": d
                 }
             )
     except Exception as e:

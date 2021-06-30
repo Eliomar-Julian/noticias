@@ -9,3 +9,12 @@ for (var i=0;i < max;i++){
     opt.innerText = lis[i].pathname.replace("/", "").toUpperCase();
     cat.appendChild(opt);
 }
+
+
+/*------- Pegar click para edição da postagem --------------*/
+// pega os cliques............
+let id, category, title, post, image;
+function editor(e){
+    id = e.querySelector("[name=id]");
+    console.log(id);
+}
