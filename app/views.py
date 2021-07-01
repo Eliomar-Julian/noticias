@@ -22,12 +22,20 @@ def create_app():
 
 # // pagina inicial
 def home_():
+    search = request.args.get("search")
+    if search:
+        cur = DATABASE.query_like(search)
+        return render_template("ultimas.html", var=cur.fetchall())    
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 50;")
     return render_template("ultimas.html", var=cur.fetchall())
 
 # // abre as paginas de categoria
 def open_page_category(category):
+    search = request.args.get("search")
+    if search:
+        cur = DATABASE.query_like(search)
+        return render_template("ultimas.html", var=cur.fetchall())
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias WHERE categoria = ?;", [category,])
     return render_template(
@@ -180,6 +188,10 @@ def login_on(session):
 
 # // buscando noticias no banco de dados....
 def query_news(category: str=None, title: str=None):
+    search = request.args.get("search")
+    if search:
+        cur = DATABASE.query_like(search)
+        return render_template("ultimas.html", var=cur.fetchall())
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category)
     return render_template(

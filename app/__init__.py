@@ -2,12 +2,12 @@ from .views import *
 
 app = create_app()
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
     return home_()
 
 
-@app.route('/<categorias>')
+@app.route('/<categorias>', methods=['GET'])
 def esporte(categorias):
     return open_page_category(categorias)
 

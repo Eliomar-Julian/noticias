@@ -1,6 +1,21 @@
 @charset "utf-8";
 
 /*---------------- menu ------------- */
+#hamburguer{
+    position:absolute;
+    left: 10%;
+    width: 100%;
+    display: none;
+}
+
+#hamburguer div{
+    width: 7%;
+    background-color: white;
+    height: 3px;
+    margin: 5px;
+    border-radius: 5px;
+
+}
 
 [data-menu]:hover{
     color: #E92049;
@@ -41,16 +56,23 @@
     border-collapse: collapse;
 }
 #first-post{
-    width: 60vw;
-    height: auto;
+    min-width: 40vw;
+    min-height: 45vh;
+    max-width: 40vw;
+    max-height: 45vh;
     background-color: transparent;
-    border-radius: 5px;
+    border: none;
+    float: left;
+    margin-left: 5%;
+    margin-bottom: 15%;
 }
 #first-post [data-article=article]{
-    font-size: 10pt;
+    font-size: 12pt;
+    text-align: justify;
 }
 [data-article="article"]{
-    font-size: 8pt;
+    font-size: 10pt;
+    max-height: 100%;
 }
 [data-h1]{
     background-color: white;
@@ -64,11 +86,17 @@
     margin-top: 7%;
 }
 [data-sub=div]{
-    width: 20vw;
+    width: 20%;
     float: left;
     color: black;
     height: 45vh;
+    max-height: 45vh;
+    padding: 5px;
+    margin-top: 5%;
     border-collapse: collapse;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.496);
+    text-align: left;
+    margin-left: 1%;
 }
 
 /* ------------- tela de login ----------- */
@@ -168,9 +196,75 @@ label{
     padding: 2%;
 }
 [data-f]{
-    width: 60%;
-    height: 45vh;
+    width: 100%;
+    height: 300px;
     margin: auto;
 
+}
+/* adaptando a tela --responsividade -- */
+@media only screen and (max-width: 900px){
+    [data-article=article]{
+        display: none;
+    }
+    [data-page]{
+        width: 100%;
+    }
+    [data-f]{
+        width: 100%;
+        height: 100%;
+    }
+    [data-h1]{
+        font-size: 12pt;
+        word-wrap: normal;
+        word-break: normal;
+        text-decoration: none;
+    }
+    [data-sub=div]{
+        float: none;
+        display: block;
+        width: 80%;
+        height: auto;
+        margin: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.469);
+        border-bottom-width: 90%;
+    }
+    [data-s]{
+        height: 200px;
+    }
+    #first-post{
+        width: 80%;
+        position: relative;
+        z-index: -1;
+        margin: auto;
+        float: none;
+        max-width: none;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.469);
+    }
+    a{
+        text-decoration: none;
+        display: block;
+        padding: 0px;
+        margin: 0px;
+    }
+    li{
+        display: block;
+    }
+    .posts{
+        width: 99%;
+        padding: 2%;
+    }
+    nav{
+        display: inline-block;
+        font-size: 10pt;
+    }
+    #data{
+        display: none;
+    }
+    nav{
+        display: none;
+    }
+    
 }
 
