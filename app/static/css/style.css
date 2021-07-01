@@ -6,13 +6,9 @@
     color: #E92049;
     transition: ease-in-out 0.5s;
     background-color: rgba(255, 255, 255, 0.272);
-    padding: 2px;
 }
 [data-menu]{
     transition: 1s;
-}
-[data-menu]:visited{
-    background-color: rgba(255, 255, 255, 0.272);
 }
 
 #logo{
@@ -142,6 +138,12 @@ label{
 #post{
     width: 100%;
 }
+.mostra{
+    display: block;
+}
+.esconde {
+    display: none;
+}
 
 
 /* -------paginas individuais -------------------- */
@@ -166,22 +168,9 @@ label{
     padding: 2%;
 }
 [data-f]{
-    width: 100%;
-    height: auto;
+    width: 60%;
+    height: 45vh;
     margin: auto;
 
 }
-[data-page]{
-    width: 70%;
-    margin: auto;
-}
-iframe{
-    margin: auto;
-}
-article img{
-    width: 50%;
-    float: left;
-    height: auto;
-    margin: auto;
-    padding: 1%;
-}
+

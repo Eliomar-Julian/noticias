@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from flask import request, redirect, url_for
+from flask import request, redirect, make_response
 from .models import *
 import hashlib
 import threading
@@ -7,38 +7,38 @@ from time import sleep
 from werkzeug.utils import secure_filename
 import os
 
+# // instancia de acesso ao banco
 DATABASE = SQL()
 
 # retorna a instancia de Flask
-
-
 def create_app():
     app = Flask(
-        __name__, static_folder="static", 
+        __name__, 
+        static_folder="static", 
         template_folder="templates"
     )
     return app
 
 
 # // pagina inicial
-
-
 def home_():
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 50;")
     return render_template("ultimas.html", var=cur.fetchall())
 
-
-
+# // abre as paginas de categoria
 def open_page_category(category):
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias WHERE categoria = ?;", [category,])
-    return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
+    return render_template(
+            "ultimas.html", 
+            var=sorted(cur.fetchall(), 
+            reverse=True
+        )
+    )
 
-
-# // expira a sessão...
-
-
+# // função em thread que expira a sessão **precisa ser trabalhada**...
+# fix: não expira se o servidro for interrompido
 def expire(args):
     timer = 3600
     for t in range(timer): 
@@ -46,21 +46,19 @@ def expire(args):
     DATABASE.delete_table("sessions", "sessions_hash", args)
 
 
-# gerador de hashs md5
-
-
-def generate_hash(element):
+# // recebe uma variavel string e gera uma hash gerador de hashs md5
+def generate_hash(element: str) -> typing.Hashable:
     return hashlib.md5(bytes(element, "utf-8")).hexdigest()
 
 
-# manipula login
-
-
+# // abre a tela de login e suas interações ** manipula login**
 def login():
     user_agent = request.headers.get("User-Agent")
     user_ip = request.remote_addr
     user_session_prepare = user_agent + user_ip
-    user_session_finnaly = generate_hash(user_session_prepare)
+    user_cookie = request.cookies.get("FNAdmin")
+    print(user_cookie)
+    user_session_finnaly = generate_hash(user_session_prepare + user_cookie if user_cookie else "")
     is_logon = DATABASE.get_table_data(
         "sessions", 
         "sessions_hash", 
@@ -85,19 +83,16 @@ def login():
                     "sessions_name", 
                     "sessions_hash", 
                     "sessions_permanent"
-                ], 
-                    [
+                ], [
                         name, 
                         user_session_finnaly, 
                         expires
                     ]
             )
-            if expires == "true": 
+            if expires == "true": # verifica se a sessão expirará...
                 threading.Thread(
-                    target=expire, 
-                    daemon=True, args=[
-                                    user_session_finnaly
-                                ]).start()
+                    target=expire, daemon=True, args=[user_session_finnaly]
+                ).start()
             return jsonify(message="success", session=user_session_finnaly)
     try:
         if user_session_finnaly == is_logon[1]:
@@ -106,16 +101,13 @@ def login():
         return render_template("login.html")
 
 
-# renderiza a apagina de posts
-
-
+# // se logado renderiza a apagina de posts
 def login_on(session):
     yes = DATABASE.get_table_data("sessions", "sessions_hash", session)
     cur = DATABASE.personal()
     data = cur.execute("SELECT * FROM noticias ORDER BY id DESC;")
     d = data.fetchall()
-    print(data.fetchall())
-    if request.method == "POST":
+    if request.method == "POST": # variaveis de inserção ao banco
         exit_ = request.form.get("logoff")
         date = request.form.get("date")
         author = request.form.get("author")
@@ -124,52 +116,69 @@ def login_on(session):
         text = request.form.get("text")
         photos = request.files.get("image")
         link_image = request.form.get("link-image")
+        id_ = request.form.get("id")
+        id_info = request.form.get("id-info")
         save_base = os.path.dirname(__file__)
         save_file = os.path.join(save_base, "static/img/upload")
-        try:
+        if id_info:
+            DATABASE.personal(
+                "DELETE FROM noticias WHERE id = ?;", [id_info,]
+            )
+        try: # verificando se a imagem foi enviada e o nome do arquivo.
             photo = photos.filename
             photos.save(f"{save_file}/{secure_filename(photo)}")
         except : 
             photo = link_image
-
-
-        if exit_ == "exit": # se sair for clicado...
+        if exit_ == "exit": # se sair for clicado, se sim volta ao /admin
             DATABASE.delete_table("sessions", "sessions_hash", yes[1])
             return redirect("/admin")
         elif exit_ == "exit-all": # deslogar todos os administradores
             DATABASE.delete_all("sessions")
             return redirect("/admin") 
 
-        if title: # se o formulario de postagem estiver preenchido 
-            DATABASE.insert_in_table(
-                "noticias", (
-                    "data", "autor", "categoria", "titulo", "materia", "foto"), 
-                    (date, author, category, title, text, photo)
-            )
+        if title: # se o formulario de postagem estiver preenchido
+            if not id_: 
+                DATABASE.insert_in_table(
+                    "noticias", (
+                        "data", "autor", "categoria", 
+                        "titulo", "materia", "foto"
+                    ), (
+                        date, author, category, 
+                        title, text, photo
+                    )
+                )
+            else:
+                cur = DATABASE.personal(
+                    """
+                    UPDATE noticias SET data = ?, 
+                    autor = ?, categoria = ?, titulo = ?, 
+                    materia = ?, foto = ? WHERE id = ?;""", [
+                        date, author, category, 
+                        title, text, photo, id_
+                        ]
+                    )
             return redirect(f"/{category}/{title}")
     try:
         active = DATABASE.get_table_data(
-            "sessions", "sessions_name", 
-            yes[0], True
+            "sessions", "sessions_name", yes[0], True
         )
         if yes[1] == session:
-            return render_template(
-                "post.html", 
-                var={
-                    "session_name": yes[0], 
-                    "session_hash": yes[1], 
-                    "session_expire":yes[2],
-                    "session_actives": len(active),
-                    "session_data": d
-                }
+            resp = make_response(render_template("post.html", 
+                    var={
+                        "session_name": yes[0], 
+                        "session_hash": yes[1], 
+                        "session_expire":yes[2],
+                        "session_actives": len(active),
+                        "session_data": d
+                    }
+                )
             )
+            resp.set_cookie("FNAdmin", yes[0])
+            return resp
     except Exception as e:
         return "Sessão expirada ou token invalido"
 
-
 # // buscando noticias no banco de dados....
-
-
 def query_news(category: str=None, title: str=None):
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category)

@@ -18,23 +18,25 @@
         </a>
         
         {% endif %}
-        <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
-            {% if tuples[6][:4] == 'http' %}
-                <div data-sub="div" class="btn btn-outline-light bd-0">
-                    <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
-                    <h1 class="h6 text-danger text-left" data-h1>{{ tuples.4[:50]|capitalize }}</h1>
+        {% if loop.index != 1 %}
+            <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
+                {% if tuples[6][:4] == 'http' %}
+                    <div data-sub="div" class="btn btn-outline-light bd-0">
+                        <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
+                        <h1 class="h6 text-danger text-left" data-h1>{{ tuples.4|capitalize }}</h1>
+                        <p id="data" class="btn btn-outline-info btn-sm">{{ tuples[1] }}</p>
+                        <p data-article="article">{{ tuples.5[:80]|safe }}...</p>
+                    </div>
+                {% else %}
+                <div data-sub="div" class="btn btn-outline-light">
+                    <img data-s class="rounded float-left" width="250" height="200" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
+                    <h1 class="h6 text-danger text-left" data-h1>{{ tuples[4]|capitalize }}</h1>
                     <p id="data" class="btn btn-outline-info btn-sm">{{ tuples[1] }}</p>
                     <p data-article="article">{{ tuples.5[:80]|safe }}...</p>
                 </div>
-            {% else %}
-            <div data-sub="div" class="btn btn-outline-light">
-                <img data-s class="rounded float-left" width="250" height="200" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
-                <h1 class="h6 text-danger text-left" data-h1>{{ tuples[4][:50]|capitalize }}</h1>
-                <p id="data" class="btn btn-outline-info btn-sm">{{ tuples[1] }}</p>
-                <p data-article="article">{{ tuples.5[:80]|safe }}...</p>
-            </div>
-            {% endif %}
-        </a>
+                {% endif %}
+            </a>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

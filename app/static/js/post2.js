@@ -13,8 +13,22 @@ for (var i=0;i < max;i++){
 
 /*------- Pegar click para edição da postagem --------------*/
 // pega os cliques............
-let id, category, title, post, image;
+let idPoste, datePoste, categoryPoste, titlePoste, postPost, imagePoste;
 function editor(e){
-    id = e.querySelector("[name=id]");
-    console.log(id);
+    let cols = document.querySelectorAll("[data-header=cols]")[1];
+    idPoste = document.querySelector("[name=id]");
+    datePoste = document.querySelector("[name=date]");
+    categoryPoste = document.querySelector("[name=category]");
+    titlePoste = document.querySelector("[name=title]");
+    postPoste = document.querySelector("[name=text]");
+    imagePoste = document.querySelector("[name=link-image]");
+    console.log(postPoste.value);
+
+    idPoste.value = e.querySelector("[name=id]").value;
+    datePoste.value = e.querySelector("[name=date]").value;
+    categoryPoste.value = e.querySelector("[name=category]").value;
+    titlePoste.value = e.querySelector("[name=title]").value;
+    postPoste.value = e.querySelector("[name=post]").value;
+    imagePoste.value = e.querySelector("[name=image]").value;
+    cols.click()
 }

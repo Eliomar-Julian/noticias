@@ -4,8 +4,8 @@
 <div class="main">
     <div data-header="content">
         <div class="btn btn-outline-info" data-header="cols">Usuários</div>
-        <div class="btn btn-info" data-header="cols">Postagens</div>
-        <div class="btn btn-info" data-header="cols">Gerenciar postagens</div>
+        <div class="btn btn-danger" data-header="cols">Postagens</div>
+        <div class="btn btn-danger" data-header="cols">Gerenciar postagens</div>
     </div>
     <div data-header="window">
         <div  data-item="user" style="display: block;">
@@ -24,8 +24,9 @@
             </form>
         </div>
         <div  data-item="post" style="display: none;">
-            <p class="h2 text-center text-info text-danger"> Nova Postagem</p>
+            <p class="h2 text-center text-info text-danger"> Postagem</p>
             <form method="POST" id="post" enctype="multipart/form-data">
+                <input type="hidden" name="id">
                 <input type="date" name="date" required>
                 <label for="author" class="text-info">Autor</label>
                 <input type="text" name="author" id="author" value="{{ var.session_name }}"><br>
@@ -35,14 +36,15 @@
                 </select>
                 <input type="text" name="title" placeholder="titulo" class="form-control" required>
                 <label for="text" class="text-info">Escreva a matéria abaixo
-                    <span class="text-danger">use html para linkar imagens e vídeos</span> 
+                    <span class="text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
                 </label>
-                <textarea name="text" id="text" cols="30" rows="10" class="form-control"></textarea>
+                
+                <textarea name="text" id="text" cols="30" rows="20" class="form-control"></textarea>
                 <div class="form-control">
                     <label class="text-info">Atalhos</label><br>
                     <button class="btn btn-secondary" title="Adicionar link" type="button" data-tool1>
                         <img src="{{ url_for('static', filename='img/add_link_white_24dp.svg')}}" alt="add_link_white_24dp">
-                        <div class="btn btn-secondary" style="display: none;" data-tool1="div">
+                        <div class="esconde" data-tool1="div">
                             <label class="text-info">Face:</label>
                             <input type="text" name="too1-face">
                             <label class="text-info">link:</label> 
@@ -66,26 +68,44 @@
                 <input type="button" value="Postar" class="btn btn-primary" id="posting">
                 <input type="reset" value="Limpar" class="btn btn-secondary">
             </form>
+            <h1 class="h4">dicas</h1>
+            <div class="form-control">
+                <ul>
+                    <li class="text-danger">Use classe banner para inserir "banner" do tipo imagem no topo da postagem, ex: class="banner".</li>
+                    <li class="text-danger">Do mensmo jeito use: class="banner baixo" ou class="banner direita", para banner lateral na vertical.</li>
+                    <li class="text-danger">Por padrao as images são flutantes a direita, mude isso descrevendo a propriedade "style".</li>
+                    <li class="text-danger">Não use aspas simples para referenciar algo, use aspas duplas.</li>
+                    <li class="text-danger">acesse a imagem de rodape por "data-page".</li>
+                    <li class="text-danger">Cuidado ao inserir banners, respeite a altura, sempre teste e veja o resultado</li>
+                </ul>
+            </div>
         </div>
         <div  data-item="manager" style="display: none;">
             <h1 class="h2 text-danger text-center">Gerenciar postagens</h1>
             <div class="content-posts">
                 <ol>
                     {% for info in var.session_data %}
-                        <li data-editor onclick="editor(this)">
-                            <p class="btn btn-outline-info">
+                    <div data-editor class="btn btn-info btn-sm">
+                        <li onclick="editor(this)">
+                            <p class="btn btn-outline-link">
                                 <span class="text-danger text-center"> data:</span>{{ info.1 }} <br> 
                                 <span class="text-danger">titulo:</span> {{info.4}}...<br>
-                                <button type="button" data-alter-btn class="btn btn-secondary btn-sm">Remover</button>
                                 <input type="hidden" name="id" value="{{ info.0 }}">
+                                <input type="hidden" name="date" value="{{ info.1 }}">
                                 <input type="hidden" name="category" value="{{ info.3 }}">
                                 <input type="hidden" name="title" value="{{ info.4 }}">
                                 <input type="hidden" name="post" value="{{ info.5 }}">
                                 <input type="hidden" name="image" value="{{ info.6 }}">
                             </p>
                         </li>
+                        <form method="post" id="remove">
+                            <button type="submit" data-alter-btn class="btn btn-danger btn-sm">Remover</button>
+                            <input type="hidden" name="id-info" value="{{ info.0 }}">
+                        </form>
+                    </div>
                     {% endfor %}
                 </ol>
+                
             </div>
 
         </div>
@@ -98,10 +118,13 @@
         padding: 1%;
         margin: 2px;
         text-align: left;
-        height: 20vh;
+        height: 10vh;
     }
     [data-alter-btn]{
-        float: right;
+        position: relative;
+    }
+    [data-editor]{
+        margin: 1%;
     }
 </style>
 

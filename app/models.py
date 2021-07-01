@@ -66,5 +66,9 @@ class SQL:
         self.conn.commit()
 
 
-    def personal(self):
-        return self.cursor
+    def personal(self, sql: str=None, args:list=None):
+        if sql:
+            self.cursor.execute(sql, args)
+            self.conn.commit()
+        else:
+            return self.cursor

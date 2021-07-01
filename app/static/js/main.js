@@ -10,7 +10,7 @@ function roll(r){
     goTop.addEventListener("click", (e)=>{
         window.scrollTo({top: 0, behavior: "smooth"});
     })
-    if(min < top){
+    if(min > 0){
         menu.setAttribute("style", "transition: 2s; top: 0; position: fixed; width: 100%;")
         menu.setAttribute("class", "navbar navbar-light bg-warning");
         logo.setAttribute("style", "display: none;");
