@@ -55,3 +55,39 @@ $("#btn-login").click(function(event) {
         }
     })
 })
+
+
+var x = screen.width;
+let openNav = false;
+if (x <= 800){
+    let navbar = document.querySelector("nav");
+    var nav = navbar.querySelector(".container-fluid");
+    let links = nav.querySelectorAll("a");
+    let form = navbar.querySelector("[class=d-flex]");
+    let button = navbar.querySelector("button");
+    let hamburguer = navbar.querySelector("#hamburguer");
+    
+    hide();
+    hamburguer.style.display = "block";
+    navbar.addEventListener("click", alterHeight);
+    
+    function hide(){
+        links.forEach(function foo(e){
+            e.setAttribute("style", "visibility: hidden; width: min-content;");
+        })
+        button.style.display="none";
+        form[0].style.display="none";
+        nav.style.display = "block";
+        nav.style.height = "20pt";
+}
+    
+    function alterHeight() {
+        nav.style.height = "auto";
+        links.forEach(function vai(e){
+            e.setAttribute("style", "visibility: visible; width: min-content;");
+        })
+        button.style.display="block";
+        form[0].style.display="block";
+        hamburguer.style.display = "none";
+    }
+}

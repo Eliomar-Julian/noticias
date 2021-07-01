@@ -18,6 +18,11 @@
     </div>
     <nav class="navbar navbar-light bg-danger" id="navbar">
         <div class="container-fluid">
+          <div id="hamburguer">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
           <a href="/" data-menu="item" class="navbar-brand text-light">Últimas notícias</a>
           <a href="/esporte" data-menu="item" class="navbar-brand text-light">Esporte</a>
           <a href="/educacao"  data-menu="item" class="navbar-brand text-light">Educação</a>
@@ -28,9 +33,9 @@
           <a href="/policial" data-menu="item" class="navbar-brand text-light">Policial</a>
           <a href="/entretenimento" data-menu="item" class="navbar-brand text-light">Entretenimento</a>
           <a href="/contato" data-menu="item" class="navbar-brand text-light">Contato</a>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success" type="button">Search</button>
+          <form class="d-flex" method="GET">
+            <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Buscar</button>
           </form>
         </div>
     </nav>    

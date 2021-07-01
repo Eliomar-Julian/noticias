@@ -4,7 +4,7 @@
 <title>{{ var.title }}</title>
 <div class="posts">
     <article>
-        <h1 class="h1 text-center text-danger">{{ var.title }}</h1>
+        <h1 class="h1 text-center text-danger">{{ var.title|safe }}</h1>
         <p class="text-warning"><span class="text-info">Por: </span> {{ var.author }} <br>
             <span class="text-info">Data: </span>{{ var.date }}
         </p>

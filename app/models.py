@@ -65,6 +65,10 @@ class SQL:
         self.cursor.execute(f"DELETE FROM {table};")
         self.conn.commit()
 
+    def query_like(self, arg: str):
+        ret = self.cursor.execute(f"SELECT * FROM noticias WHERE titulo LIKE '%{arg}%';")
+        return ret
+
 
     def personal(self, sql: str=None, args:list=None):
         if sql:
