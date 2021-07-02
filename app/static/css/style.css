@@ -87,7 +87,6 @@
 }
 [data-sub=div]{
     width: 20%;
-    float: left;
     color: black;
     height: 45vh;
     max-height: 45vh;
@@ -97,6 +96,7 @@
     border-bottom: 1px solid rgba(128, 128, 128, 0.496);
     text-align: left;
     margin-left: 1%;
+    display: inline-block;
 }
 
 /* ------------- tela de login ----------- */
@@ -176,7 +176,7 @@ label{
 
 /* -------paginas individuais -------------------- */
 .posts{
-    width: 70%;
+    width: 40%;
     margin: auto;
     margin-top: 10%;
     text-align: left;
@@ -184,9 +184,7 @@ label{
     align-items: center;
 }
 
-#photos{
-    width: 30vw;
-    height: auto;
+#photos-page{
     margin: auto;
 }
 [data-s]{
@@ -200,6 +198,14 @@ label{
     height: 300px;
     margin: auto;
 
+}
+[data-page]{
+    width: 40vw;
+    height: auto;
+}
+img {
+    width: 40vw;
+    height: auto;
 }
 /* adaptando a tela --responsividade -- */
 @media only screen and (max-width: 900px){

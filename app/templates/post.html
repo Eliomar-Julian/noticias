@@ -34,34 +34,11 @@
                 <select name="category" id="category" class="form-control">
                     {# opçoes renderizadas dinamicamente com java script apartir do menu #}
                 </select>
-                <input type="text" name="title" placeholder="titulo" class="form-control" required>
+                <input type="text" name="title" placeholder="titulo" maxlength="100" class="form-control" required>
                 <label for="text" class="text-info">Escreva a matéria abaixo
                     <span class="text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
                 </label>
-                
                 <textarea name="text" id="text" cols="30" rows="20" class="form-control"></textarea>
-                <div class="form-control">
-                    <label class="text-info">Atalhos</label><br>
-                    <button class="btn btn-secondary" title="Adicionar link" type="button" data-tool1>
-                        <img src="{{ url_for('static', filename='img/add_link_white_24dp.svg')}}" alt="add_link_white_24dp">
-                        <div class="esconde" data-tool1="div">
-                            <label class="text-info">Face:</label>
-                            <input type="text" name="too1-face">
-                            <label class="text-info">link:</label> 
-                            <input type="text" name="too1-link">
-                            <input class="btn btn-primary" type="button" id="too1" value="ok">
-                        </div>
-                    </button>
-                    <button class="btn btn-secondary" title="Adicionar imagem externa" type="button" data-tool2>
-                        <img src="{{ url_for('static', filename='img/image_white_24dp.svg')}}" alt="add_link_white_24dp">
-                    </button>
-                    <button class="btn btn-secondary" title="Quebra linha" type="button" data-tool3>
-                        <img src="{{ url_for('static', filename='img/keyboard_return_white_24dp.svg')}}" alt="add_link_white_24dp">
-                    </button>
-                    <button class="btn btn-secondary" title="Espaço" type="button" data-tool4>
-                        <img src="{{ url_for('static', filename='img/space_bar_white_24dp.svg')}}" alt="add_link_white_24dp">
-                    </button>
-                </div>
                 <input type="file" name="image">
                 &nbsp;&nbsp;<label class="text-info text-danger"for=""> ou link uma imagem da internet</label>
                 <input type="text" name="link-image" placeholder="Cole o link aqui">
@@ -70,14 +47,25 @@
             </form>
             <h1 class="h4">dicas para não bagunçar a interface</h1>
             <div class="form-control">
-                <ul>
-                    <li class="text-danger">Use classe banner para inserir "banner" do tipo imagem no topo da postagem, ex: class="banner".</li>
-                    <li class="text-danger">Do mensmo jeito use: class="banner baixo" ou class="banner direita", para banner lateral na vertical.</li>
-                    <li class="text-danger">Por padrao as images são flutantes a direita, mude isso descrevendo a propriedade "style".</li>
-                    <li class="text-danger">Não use aspas simples para referenciar algo, use aspas duplas.</li>
-                    <li class="text-danger">acesse a imagem de rodape por "data-page".</li>
-                    <li class="text-danger">Cuidado ao inserir banners, respeite a altura, sempre teste e veja o resultado</li>
-                </ul>
+                <p><a href="#" class="text-primary">Primary link</a></p>
+                <p><a href="#" class="text-secondary">Secondary link</a></p>
+                <p><a href="#" class="text-success">Success link</a></p>
+                <p><a href="#" class="text-danger">Danger link</a></p>
+                <p><a href="#" class="text-warning">Warning link</a></p>
+                <p><a href="#" class="text-info">Info link</a></p>
+                <p><a href="#" class="text-light bg-dark">Light link</a></p>
+                <p><a href="#" class="text-dark">Dark link</a></p>
+                <p><a href="#" class="text-muted">Muted link</a></p>
+                <p><a href="#" class="text-white bg-dark">White link</a></p>
+                <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+                <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
+                <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+                <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
+                <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+                <div class="p-3 mb-2 bg-info text-white">.bg-info</div>
+                <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
+                <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
+                <div class="p-3 mb-2 bg-white text-dark">.bg-white</div>
             </div>
         </div>
         <div  data-item="manager" style="display: none;">
