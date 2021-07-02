@@ -212,6 +212,9 @@ img {
     [data-article=article]{
         display: none;
     }
+    .h5.text-secondary{
+        display: none;
+    }
     [data-page]{
         width: 100%;
     }
