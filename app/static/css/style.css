@@ -149,6 +149,12 @@ body{
     align-items: center;
     border-collapse: collapse;
 }
+[data-editor]{
+    margin-top: 1%;
+    max-width: 80vw;
+    min-width: 80vw;
+    max-height: 20vh;                                                                                                                           
+}
 .form-group{
     width: 80%;
     margin: auto;
