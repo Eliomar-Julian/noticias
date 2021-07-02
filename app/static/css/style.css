@@ -172,6 +172,12 @@ label{
 .esconde {
     display: none;
 }
+[data-editor]{
+    margin-top: 1%;
+    max-width: 80vw;
+    min-width: 80vw;
+    max-height: 20vh;
+}
 
 
 /* -------paginas individuais -------------------- */
