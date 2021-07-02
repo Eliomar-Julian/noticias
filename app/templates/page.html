@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 {% block body %}
 {# renderiza as paginas clicadas #}
-<title>{{ var.title }}</title>
-<div class="posts">
-    <article>
-        <h1 class="h3 text-danger text-left">{{ var.title }}</h1>
-        <p class="text-warning"><span class="text-info">Por: </span> {{ var.author }} <br>
-            <span class="text-info">Data: </span>{{ var.date }}
-        </p>
-        <div class="body-post">
-            <p>{{ var.text|safe }}</p>
-        </div>
-        <div id="photos-page">
-            {% if var.photos[:4] == 'http' %}
-                <img data-page src="{{ var.photos }}" alt="{{ var.photos }}">
-            {% else %}
-                <img data-page src="{{ url_for('static', filename='img/upload/' + var.photos) }}" alt="{{ var.photos }}">
-            {% endif %}
-        </div>
-    </article>
-    
-</div>
+    <title>{{ var.title }}</title>
+    <div class="posts">
+        <article>
+            <h1 class="h3 text-danger text-left">{{ var.title }}</h1>
+            <p class="text-warning"><span class="text-info">Por: </span> {{ var.author }} <br>
+                <span class="text-info">Data: </span>{{ var.date }}
+            </p>
+            <div class="body-post">
+                <p>{{ var.text|safe }}</p>
+            </div>
+            <div id="photos-page">
+                {% if var.photos[:4] == 'http' %}
+                    <img data-page src="{{ var.photos }}" alt="{{ var.photos }}">
+                {% else %}
+                    <img data-page src="{{ url_for('static', filename='img/upload/' + var.photos) }}" alt="{{ var.photos }}">
+                {% endif %}
+            </div>
+        </article>
+    </div>
 {% endblock %}

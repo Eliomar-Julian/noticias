@@ -7,6 +7,9 @@ for (var i=0;i < max;i++){
     var opt = document.createElement("option");
     opt.value = lis[i].pathname.replace("/", "");
     opt.innerText = lis[i].pathname.replace("/", "").toUpperCase();
+    if(i == 1){
+        opt.setAttribute("selected", "selected");
+    }
     cat.appendChild(opt);
 }
 

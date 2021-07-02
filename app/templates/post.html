@@ -1,121 +1,108 @@
 {% extends 'base.html' %}
 {# ---------------------- pagina de postagem ------------------------- #}
 {% block body %}
-<div class="main">
-    <div data-header="content">
-        <div class="btn btn-outline-info" data-header="cols">Usuários</div>
-        <div class="btn btn-danger" data-header="cols">Postagens</div>
-        <div class="btn btn-danger" data-header="cols">Gerenciar postagens</div>
-    </div>
-    <div data-header="window">
-        <div  data-item="user" style="display: block;">
-            <h1 class="h3 text-danger text-center">Usuários</h1>
-            <form action="" method="POST">
-                <div class="form-group">
-                    <p class="text-info"><span class="text-danger">Logado como:</span> {{ var.session_name }}</p>
-                    <p class="text-info"><span class="text-danger"> Token: </span> {{ var.session_hash }}</p>
-                    <p class="text-info"><span class="text-danger">Expirar sessão:</span> 
-                        {{ var.session_expire|replace('false', 'Não')|replace('true', 'Sim') }}
-                    </p>
-                    <p class="text-info"><span class="text-danger">Dispositivos logados:</span> {{ var.session_actives }}</p>
-                    <button class="btn btn-primary" name="logoff" value="exit" type="submit">Deslogar esse administrador</button>
-                    <button class="btn btn-secondary" name="logoff" value="exit-all" type="submit">Deslogar todos os administradores</button>
-                </div>
-            </form>
+    <div class="main">
+        <div data-header="content">
+            <div class="btn btn-outline-info" data-header="cols">Usuários</div>
+            <div class="btn btn-danger" data-header="cols">Postagens</div>
+            <div class="btn btn-danger" data-header="cols">Gerenciar postagens</div>
         </div>
-        <div  data-item="post" style="display: none;">
-            <p class="h2 text-center text-info text-danger"> Postagem</p>
-            <form method="POST" id="post" enctype="multipart/form-data">
-                <input type="hidden" name="id">
-                <input type="date" name="date" required>
-                <label for="author" class="text-info">Autor</label>
-                <input type="text" name="author" id="author" value="{{ var.session_name }}"><br>
-                <label for="category" class="text-info">selecione a categoria da postagem</label>
-                <select name="category" id="category" class="form-control">
-                    {# opçoes renderizadas dinamicamente com java script apartir do menu #}
-                </select>
-                <input type="text" name="title" placeholder="titulo" maxlength="100" class="form-control" required>
-                <label for="text" class="text-info">Escreva a matéria abaixo
-                    <span class="text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
-                </label>
-                <textarea name="text" id="text" cols="30" rows="20" class="form-control"></textarea>
-                <input type="file" name="image">
-                &nbsp;&nbsp;<label class="text-info text-danger"for=""> ou link uma imagem da internet</label>
-                <input type="text" name="link-image" placeholder="Cole o link aqui">
-                <input type="button" value="Postar" class="btn btn-primary" id="posting">
-                <input type="reset" value="Limpar" class="btn btn-secondary">
-            </form>
-            <h1 class="h4">dicas para não bagunçar a interface</h1>
-            <div class="form-control">
-                <p><a href="#" class="text-primary">Primary link</a></p>
-                <p><a href="#" class="text-secondary">Secondary link</a></p>
-                <p><a href="#" class="text-success">Success link</a></p>
-                <p><a href="#" class="text-danger">Danger link</a></p>
-                <p><a href="#" class="text-warning">Warning link</a></p>
-                <p><a href="#" class="text-info">Info link</a></p>
-                <p><a href="#" class="text-light bg-dark">Light link</a></p>
-                <p><a href="#" class="text-dark">Dark link</a></p>
-                <p><a href="#" class="text-muted">Muted link</a></p>
-                <p><a href="#" class="text-white bg-dark">White link</a></p>
-                <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
-                <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
-                <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
-                <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
-                <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
-                <div class="p-3 mb-2 bg-info text-white">.bg-info</div>
-                <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
-                <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
-                <div class="p-3 mb-2 bg-white text-dark">.bg-white</div>
-            </div>
-        </div>
-        <div  data-item="manager" style="display: none;">
-            <h1 class="h2 text-danger text-center">Gerenciar postagens</h1>
-            <div class="content-posts">
-                <ol>
-                    {% for info in var.session_data %}
-                    <div data-editor class="btn btn-info btn-sm">
-                        <li onclick="editor(this)">
-                            <p class="btn btn-outline-link">
-                                <span class="text-danger text-center"> data:</span>{{ info.1 }} <br> 
-                                <span class="text-danger">titulo:</span> {{info.4}}...<br>
-                                <input type="hidden" name="id" value="{{ info.0 }}">
-                                <input type="hidden" name="date" value="{{ info.1 }}">
-                                <input type="hidden" name="category" value="{{ info.3 }}">
-                                <input type="hidden" name="title" value="{{ info.4 }}">
-                                <input type="hidden" name="post" value="{{ info.5 }}">
-                                <input type="hidden" name="image" value="{{ info.6 }}">
-                            </p>
-                        </li>
-                        <form method="post" id="remove">
-                            <button type="submit" data-alter-btn class="btn btn-danger btn-sm">Remover</button>
-                            <input type="hidden" name="id-info" value="{{ info.0 }}">
-                        </form>
+        <div data-header="window">
+            <div  data-item="user" style="display: block;">
+                <h1 class="h3 text-danger text-center">Usuários</h1>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <p class="text-info"><span class="text-danger">Logado como:</span> {{ var.session_name }}</p>
+                        <p class="text-info"><span class="text-danger"> Token: </span> {{ var.session_hash }}</p>
+                        <p class="text-info"><span class="text-danger">Expirar sessão:</span> 
+                            {{ var.session_expire|replace('false', 'Não')|replace('true', 'Sim') }}
+                        </p>
+                        <p class="text-info"><span class="text-danger">Dispositivos logados:</span> {{ var.session_actives }}</p>
+                        <button class="btn btn-primary" name="logoff" value="exit" type="submit">Deslogar esse administrador</button>
+                        <button class="btn btn-secondary" name="logoff" value="exit-all" type="submit">
+                            Deslogar todos os administradores
+                        </button>
                     </div>
-                    {% endfor %}
-                </ol>
-                
+                </form>
             </div>
+            <div  data-item="post" style="display: none;">
+                <p class="h2 text-center text-info text-danger"> Postagem</p>
+                <form method="POST" id="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id">
+                    <input type="date" name="date" required>
+                    <label for="author" class="text-info">Autor</label>
+                    <input type="text" name="author" id="author" value="{{ var.session_name }}"><br>
+                    <label for="category" class="text-info">selecione a categoria da postagem</label>
+                    <select name="category" id="category" class="form-control">
+                        {# opçoes renderizadas dinamicamente com java script apartir do menu #}
+                    </select>
+                    <textarea type="text" name="title" max="150" placeholder="TITULO: maximo de 150 caracteres" 
+                        maxlength="150" class="form-control" required>
+                    </textarea>
+                    <label for="text" class="text-info">Escreva a matéria abaixo
+                        <span class="text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
+                    </label>
+                    <textarea name="text" id="text" cols="30" rows="20" class="form-control"></textarea>
+                    <input type="file" name="image">
+                    &nbsp;&nbsp;<label class="text-info text-danger"for=""> ou link uma imagem da internet</label>
+                    <input type="text" name="link-image" placeholder="Cole o link aqui">
+                    <input type="button" value="Postar" class="btn btn-primary" id="posting">
+                    <input type="reset" value="Limpar" class="btn btn-secondary">
+                </form>
+                <h1 class="h4">dicas para não bagunçar a interface</h1>
+                <div class="form-control">
+                    <p><a href="#" class="text-primary">Primary link</a></p>
+                    <p><a href="#" class="text-secondary">Secondary link</a></p>
+                    <p><a href="#" class="text-success">Success link</a></p>
+                    <p><a href="#" class="text-danger">Danger link</a></p>
+                    <p><a href="#" class="text-warning">Warning link</a></p>
+                    <p><a href="#" class="text-info">Info link</a></p>
+                    <p><a href="#" class="text-light bg-dark">Light link</a></p>
+                    <p><a href="#" class="text-dark">Dark link</a></p>
+                    <p><a href="#" class="text-muted">Muted link</a></p>
+                    <p><a href="#" class="text-white bg-dark">White link</a></p>
+                    <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+                    <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
+                    <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+                    <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
+                    <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+                    <div class="p-3 mb-2 bg-info text-white">.bg-info</div>
+                    <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
+                    <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
+                    <div class="p-3 mb-2 bg-white text-dark">.bg-white</div>
+                </div>
+            </div>
+            <div  data-item="manager" style="display: none;">
+                <h1 class="h2 text-danger text-center">Gerenciar postagens</h1>
+                <div class="content-posts">
+                    <ol>
+                        {% for info in var.session_data %}
+                            <div data-editor class="btn btn-info btn-sm">
+                                <li onclick="editor(this)">
+                                    <p class="btn btn-outline-link">
+                                        <span class="text-danger text-center"> data:</span>{{ info.1 }} <br> 
+                                        <span class="text-danger">titulo:</span> {{info.4}}...<br>
+                                        <input type="hidden" name="id" value="{{ info.0 }}">
+                                        <input type="hidden" name="date" value="{{ info.1 }}">
+                                        <input type="hidden" name="category" value="{{ info.3 }}">
+                                        <input type="hidden" name="title" value="{{ info.4 }}">
+                                        <input type="hidden" name="post" value="{{ info.5 }}">
+                                        <input type="hidden" name="image" value="{{ info.6 }}">
+                                    </p>
+                                </li>
+                                <form method="post" id="remove">
+                                    <button type="submit" data-alter-btn class="btn btn-danger btn-sm">Remover</button>
+                                    <input type="hidden" name="id-info" value="{{ info.0 }}">
+                                </form>
+                            </div>
+                        {% endfor %}
+                    </ol>
+                    
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
-<style>
-    [data-editor] p{
-        width: 50vw;
-        margin: auto;
-        padding: 1%;
-        margin: 2px;
-        text-align: left;
-        height: 10vh;
-    }
-    [data-alter-btn]{
-        position: relative;
-    }
-    [data-editor]{
-        margin: 1%;
-    }
-</style>
-
-<script src="{{ url_for('static', filename='js/post2.js') }}"></script>
-<script src="{{ url_for('static', filename='js/post.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/post2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/post.js') }}"></script>
 {% endblock %}
