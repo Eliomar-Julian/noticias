@@ -194,15 +194,18 @@ def query_news(category: str=None, title: str=None):
         return render_template("ultimas.html", var=cur.fetchall())
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category)
-    return render_template(
-        "page.html", var={
-            "id": data[0], 
-            "date": data[1],
-            "author": data[2], 
-            "category": data[3], 
-            "title": data[4], 
-            "text": data[5],
-            "photos": data[6],
-            "outer": outer
-        }
-    )
+    try:
+        return render_template(
+            "page.html", var={
+                "id": data[0], 
+                "date": data[1],
+                "author": data[2], 
+                "category": data[3], 
+                "title": data[4], 
+                "text": data[5],
+                "photos": data[6],
+                "outer": outer
+            }
+        )
+    except:
+        return str(data)
