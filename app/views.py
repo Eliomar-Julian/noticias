@@ -129,7 +129,9 @@ def login_on(session):
         credits_ = request.form.get("credits")
         code = request.form.get("code")
         if code: 
-            for char in code.split(" "):
+            tmp = code
+            code = ""
+            for char in tmp.split(" "):
                 code += char.replace("\n", "") + " "
         save_base = os.path.dirname(__file__)
         save_file = os.path.join(save_base, "static/img/upload")
