@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {# ---------------------- pagina de postagem ------------------------- #}
 {% block body %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/lib/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/theme/dracula.css') }}">
     <div class="main">
         <div data-header="content">
             <div class="btn btn-outline-info" data-header="cols">Usuários</div>
@@ -30,46 +32,52 @@
                 <form method="POST" id="post" enctype="multipart/form-data">
                     <input type="hidden" name="id">
                     <input type="date" name="date" required>
+                    <input type="text" name="credits" placeholder="Créditos...">
                     <label for="author" class="text-info">Autor</label>
                     <input type="text" name="author" id="author" value="{{ var.session_name }}"><br>
                     <label for="category" class="text-info">selecione a categoria da postagem</label>
                     <select name="category" id="category" class="form-control">
                         {# opçoes renderizadas dinamicamente com java script apartir do menu #}
                     </select>
-                    <textarea type="text" name="title" max="150" placeholder="TITULO: maximo de 150 caracteres" 
-                        maxlength="150" class="form-control" required>
-                    </textarea>
-                    <label for="text" class="text-info">Escreva a matéria abaixo
+                    <label class="text-info">Escreva um titulo</label>
+                    <textarea type="text" name="title" placeholder="TITULO: maximo de 150 caracteres" maxlength="150" class="form-control" required></textarea>
+                    <label for="text" class="text-info" aria-required="true">Escreva a matéria abaixo
                         <span class="text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
                     </label>
                     <textarea name="text" id="text" cols="30" rows="20" class="form-control"></textarea>
+                    <h1 class="h4 text-info text-center">Insira códigos personalizados a postagem</h1>
+                    <p class="h6 text-secondary">insira links, imagens, propagandas, videos e muito mais atravéz desta area.</p>
+                    <span class="h6 text-secondary">clique na área para ver o código</span>
+                     <!-- Create a simple CodeMirror instance -->
+                    <textarea class="code-area" name="code" title="Edite codigos para a pagina"></textarea>
                     <input type="file" name="image">
                     &nbsp;&nbsp;<label class="text-info text-danger"for=""> ou link uma imagem da internet</label>
                     <input type="text" name="link-image" placeholder="Cole o link aqui">
                     <input type="button" value="Postar" class="btn btn-primary" id="posting">
                     <input type="reset" value="Limpar" class="btn btn-secondary">
                 </form>
+
                 <h1 class="h4">dicas para não bagunçar a interface</h1>
                 <div class="form-control">
-                    <p><a href="#" class="text-primary">Primary link</a></p>
-                    <p><a href="#" class="text-secondary">Secondary link</a></p>
-                    <p><a href="#" class="text-success">Success link</a></p>
-                    <p><a href="#" class="text-danger">Danger link</a></p>
-                    <p><a href="#" class="text-warning">Warning link</a></p>
-                    <p><a href="#" class="text-info">Info link</a></p>
-                    <p><a href="#" class="text-light bg-dark">Light link</a></p>
-                    <p><a href="#" class="text-dark">Dark link</a></p>
-                    <p><a href="#" class="text-muted">Muted link</a></p>
-                    <p><a href="#" class="text-white bg-dark">White link</a></p>
-                    <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
-                    <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
-                    <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
-                    <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
-                    <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
-                    <div class="p-3 mb-2 bg-info text-white">.bg-info</div>
-                    <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
-                    <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
-                    <div class="p-3 mb-2 bg-white text-dark">.bg-white</div>
+                    <span><a href="#" class="text-primary">Primary link</a></span>
+                    <span><a href="#" class="text-secondary">Secondary link</a></span>
+                    <span><a href="#" class="text-success">Success link</a></span>
+                    <span><a href="#" class="text-danger">Danger link</a></span>
+                    <span><a href="#" class="text-warning">Warning link</a></span>
+                    <span><a href="#" class="text-info">Info link</a></span>
+                    <span><a href="#" class="text-light bg-dark">Light link</a></span>
+                    <span><a href="#" class="text-dark">Dark link</a></span>
+                    <span><a href="#" class="text-muted">Muted link</a></span>
+                    <span><a href="#" class="text-white bg-dark">White link</a></span>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-primary text-white">.bg-primary</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-secondary text-white">.bg-secondary</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-success text-white">.bg-success</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-danger text-white">.bg-danger</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-warning text-dark">.bg-warning</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-info text-white">.bg-info</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-light text-dark">.bg-light</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-dark text-white">.bg-dark</div>
+                    <div style="width: 400px; float: left; margin-top: 1%;" class="container-fluid bg-white text-dark">.bg-white</div>
                 </div>
             </div>
             <div  data-item="manager" style="display: none;">
@@ -88,6 +96,8 @@
                                         <input type="hidden" name="title" value="{{ info.4 }}">
                                         <input type="hidden" name="post" value="{{ info.5 }}">
                                         <input type="hidden" name="image" value="{{ info.6 }}">
+                                        <input type="hidden" name="credits" value="{{ info.7 }}">
+                                        <input type="hidden" name="code" value="{{ info.8 }}">
                                     </p>
                                 </li>
                                 <form method="post" id="remove">
@@ -105,4 +115,43 @@
     </div>
     <script src="{{ url_for('static', filename='js/post2.js') }}"></script>
     <script src="{{ url_for('static', filename='js/post.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/addon/hint/show-hint.js') }}"></script>
+    <script>
+        var area = document.querySelector(".code-area");
+        var edito = CodeMirror.fromTextArea(area, {
+            theme: "dracula",
+            mode: "xml",
+            text: "show-hint",
+            indentWithTabs: true,
+            lineNumbers: false,
+        });
+        
+/*------- Pegar click para edição da postagem --------------*/
+// pega os cliques............
+let idPoste, datePoste, categoryPoste, titlePoste, postPost, imagePoste, credits, code;
+function editor(e){
+    let cols = document.querySelectorAll("[data-header=cols]")[1];
+    idPoste = document.querySelector("[name=id]");
+    datePoste = document.querySelector("[name=date]");
+    categoryPoste = document.querySelector("[name=category]");
+    titlePoste = document.querySelector("[name=title]");
+    postPoste = document.querySelector("[name=text]");
+    imagePoste = document.querySelector("[name=link-image]");
+    credits = document.querySelector("[name=credits]");
+
+
+    idPoste.value = e.querySelector("[name=id]").value;
+    datePoste.value = e.querySelector("[name=date]").value;
+    categoryPoste.value = e.querySelector("[name=category]").value;
+    titlePoste.value = e.querySelector("[name=title]").value;
+    postPoste.value = e.querySelector("[name=post]").value;
+    imagePoste.value = e.querySelector("[name=image]").value;
+    credits.value = e.querySelector("[name=credits]").value;
+    edito.getDoc().setValue(e.querySelector("[name=code]").value);
+    cols.click()
+    area.click()
+}
+    </script>
 {% endblock %}

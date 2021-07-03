@@ -3,23 +3,26 @@
 document.onwheel = roll; // funçoes para fixar o menu no topo da tela
 function roll(r){
     let menu = document.querySelector("#navbar");
-    let top = menu.offsetTop;
+    let items = document.querySelectorAll("[data-menu=item]");
     let min = window.pageYOffset;
     let logo = document.querySelector("#logo");
-    let goTop = document.querySelector("[name=go-top]");
-    goTop.addEventListener("click", (e)=>{
-        window.scrollTo({top: 0, behavior: "smooth"});
-    })
     if(min > 0){
         menu.setAttribute("style", "transition: 2s; top: 0; position: fixed; width: 100%;")
-        menu.setAttribute("class", "navbar navbar-light bg-warning");
+        menu.setAttribute("class", "navbar navbar-light bg-light");
         logo.setAttribute("style", "display: none;");
+        items.forEach(function changeColor(change){
+            change.setAttribute("class", "navbar-brand text-danger text-xsm");
+            change.setAttribute("style", "transition: 1s;")
+        })
     } 
     if(min === 0){
         menu.removeAttribute("style", "top");
         menu.setAttribute("style", "position: relative;");
         menu.setAttribute("class", "navbar navbar-light bg-danger");
         logo.setAttribute("style", "display: flex;");
+        items.forEach(function reChangedColor(change){
+            change.setAttribute("class", "navbar-brand text-light")
+        })
     }
 
 }
@@ -56,7 +59,7 @@ $("#btn-login").click(function(event) {
     })
 })
 
-
+// menu
 var x = screen.width;
 let openNav = false;
 if (x <= 800){

@@ -126,6 +126,11 @@ def login_on(session):
         link_image = request.form.get("link-image")
         id_ = request.form.get("id")
         id_info = request.form.get("id-info")
+        credits_ = request.form.get("credits")
+        code = request.form.get("code")
+        if code: 
+            for char in code.split(" "):
+                code += char.replace("\n", "") + " "
         save_base = os.path.dirname(__file__)
         save_file = os.path.join(save_base, "static/img/upload")
         if id_info:
@@ -149,10 +154,10 @@ def login_on(session):
                 DATABASE.insert_in_table(
                     "noticias", (
                         "data", "autor", "categoria", 
-                        "titulo", "materia", "foto"
+                        "titulo", "materia", "foto", "creditos", "codigo"
                     ), (
                         date, author, category, 
-                        title, text, photo
+                        title, text, photo, credits_, code
                     )
                 )
             else:
@@ -160,9 +165,9 @@ def login_on(session):
                     """
                     UPDATE noticias SET data = ?, 
                     autor = ?, categoria = ?, titulo = ?, 
-                    materia = ?, foto = ? WHERE id = ?;""", [
+                    materia = ?, foto = ?, creditos = ?, codigo = ? WHERE id = ?;""", [
                         date, author, category, 
-                        title, text, photo, id_
+                        title, text, photo, credits_, code, id_
                         ]
                     )
             return redirect(f"/{category}/{title}")
@@ -194,6 +199,7 @@ def query_news(category: str=None, title: str=None):
         return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category)
+    print(data)
     try:
         return render_template(
             "page.html", var={
@@ -204,6 +210,8 @@ def query_news(category: str=None, title: str=None):
                 "title": data[4], 
                 "text": data[5],
                 "photos": data[6],
+                "credits": data[7],
+                "code": data[8],
                 "outer": outer
             }
         )

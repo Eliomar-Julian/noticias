@@ -27,8 +27,13 @@ let aberto = false;
 pst.addEventListener("click", (e) => {
     emptyText = texto.value.replace(/\n/g, "<br>")
     texto.value = emptyText.replace(/\'/g, "&lsquo;");
+    
     pst.setAttribute("type", "submit");
 })
+
+
+
+
 tool1.addEventListener("click", revela);
 
 function revela(){

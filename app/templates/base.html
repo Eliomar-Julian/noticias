@@ -11,7 +11,7 @@
 </head>
 <header>
     <script src="{{ url_for('static', filename='jquery/dist/jquery.min.js') }}"></script>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/desenho.png') }}" />
+    <link rel="shortcut icon" href="../static/img/desenho.svg">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/dist/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <div class="logo" id="logo">
@@ -22,7 +22,7 @@
           alt="face" title="Facebook" id="face-link">
       </a>
       <a href="/"><img class="social" src="{{ url_for('static', filename='img/twitter.jpg') }}" 
-        alt="twitter" title="Twiter" id="twitter-link">
+      alt="twitter" title="Twiter" id="twitter-link">
       </a>
       <a href="/"><img class="social" src="{{ url_for('static', filename='img/youtube.jpg') }}" 
         alt="youtube" title="Youtube" id="youtube-link">
@@ -46,7 +46,7 @@
           <a href="/entretenimento" data-menu="item" class="navbar-brand text-light">Entretenimento</a>
           <a href="/contato" data-menu="item" class="navbar-brand text-light">Contato</a>
           <form class="d-flex" method="GET">
-            <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <input name="search" class="form-control me-2" type="search" placeholder="Procurar..." aria-label="Buscar">
             <button class="btn btn-success" type="submit">Buscar</button>
           </form>
         </div>
@@ -57,13 +57,9 @@
     {# --------corpo da pagina ----------------------- #}
 {% endblock %}
 <div style="height: 1000pt;"></div>
-<div name="go-top" class="btn bg-warning" 
-  style="width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; position: fixed; bottom: 5%; right: 5%;">
-  <p class="h5 text-center text-primary">TOPO</p>
-</div>
 <footer>
-  <div class="conteiner" id="footer">
-    rodape
+  <div class="bg-danger" id="footer" style="width: 100vw;">
+    <br><br><br><br><br><br><br>
   </div>
 </footer>
 <script src="{{ url_for('static', filename='bootstrap/dist/js/bootstrap.min.js') }}"></script>

@@ -5,11 +5,15 @@
     <div class="posts">
         <article>
             <h1 class="h3 text-danger text-left">{{ var.title }}</h1>
-            <p class="text-warning"><span class="text-info">Por: </span> {{ var.author }} <br>
-                <span class="text-info">Data: </span>{{ var.date }}
-            </p>
+            <div style="font-size: small; display: inline-flexbox; margin-bottom: 5%;">
+                <p style="padding: 0px; margin: 0px;" class="text-danger">Data: <span class="text-secondary">{{ var.date }}</span></p>
+                <p style="padding: 0px; margin: 0px;" class="text-danger">Editor: <span class="text-secondary">{{ var.author }}</span></p>
+                <p style="padding: 0px; margin: 0px;" class="text-danger">Créditos: 
+                    {% if var.credits %}<span class="text-secondary">{{ var.credits|safe }}</span>{% endif %}
+                </p>
+            </div>
             <div class="body-post">
-                <p>{{ var.text|safe }}</p>
+                <p>{{ var.text|safe }}{{ var.code|safe }}</p>
             </div>
             <div id="photos-page">
                 {% if var.photos[:4] == 'http' %}
