@@ -25,7 +25,7 @@ def home_():
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
-        return render_template("ultimas.html", var=cur.fetchall())    
+        return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 50;")
     return render_template("ultimas.html", var=cur.fetchall())
