@@ -35,7 +35,7 @@ def open_page_category(category):
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
-        return render_template("ultimas.html", var=cur.fetchall())
+        return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias WHERE categoria = ?;", [category,])
     return render_template(
@@ -191,7 +191,7 @@ def query_news(category: str=None, title: str=None):
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
-        return render_template("ultimas.html", var=cur.fetchall())
+        return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category)
     try:
