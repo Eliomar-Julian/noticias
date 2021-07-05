@@ -4,11 +4,12 @@
     <title>{{ var.title }}</title>
     <div class="posts">
         <article>
-            <h1 class="h3 text-danger text-left">{{ var.title }}</h1>
+            <div data-space class="container container-fluid"></div>
+            <h1 class="h1 text-dark text-left">{{ var.title }}</h1>
             <div style="font-size: small; display: inline-flexbox; margin-bottom: 5%;">
-                <p style="padding: 0px; margin: 0px;" class="text-danger">Data: <span class="text-secondary">{{ var.date }}</span></p>
-                <p style="padding: 0px; margin: 0px;" class="text-danger">Editor: <span class="text-secondary">{{ var.author }}</span></p>
-                <p style="padding: 0px; margin: 0px;" class="text-danger">Créditos: 
+                <p style="padding: 0px; margin: 0px;" class="text-info">Data: <span class="text-secondary">{{ var.date }}</span></p>
+                <p style="padding: 0px; margin: 0px;" class="text-info">Editor: <span class="text-secondary">{{ var.author }}</span></p>
+                <p style="padding: 0px; margin: 0px;" class="text-info">Créditos: 
                     {% if var.credits %}<span class="text-secondary">{{ var.credits|safe }}</span>{% endif %}
                 </p>
             </div>
@@ -24,4 +25,35 @@
             </div>
         </article>
     </div>
+    <div>
+        <h1 class="h3 text-dark text-center" style="margin-top: 10%;">Veja mais relacionados...</h1><hr>
+        {% for tuples in var.outer %}
+        {% if tuples[0] != var.id %}
+        <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
+            {% if tuples[6][:4] == 'http' %}
+                <div data-sub="div" class="btn btn-outline-light">
+                    <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
+                    <h1 class="h6 text-dark text-left" data-h2>{{ tuples.4|upper }}</h1>
+                    <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
+                    <p data-article="article" class="text-success text-center">{{ tuples.5[:75] }}...</p>
+                </div>
+            {% else %}
+            <div data-sub="div" class="btn btn-light">
+                <img data-s class="rounded float-left" width="250" height="200" 
+                    src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
+                <h1 class="h6 text-dark text-left" data-h2>{{ tuples[4]|upper }}</h1>
+                <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
+                <p data-article="article" class="text-success text-center">{{ tuples.5[:75] }}...</p>
+            </div>
+            {% endif %}
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <style>
+        [data-h2]{
+            text-align: center;
+            margin-top: 2%;
+        }
+    </style>
 {% endblock %}

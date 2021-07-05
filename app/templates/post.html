@@ -11,7 +11,7 @@
         </div>
         <div data-header="window">
             <div  data-item="user" style="display: block;">
-                <h1 class="h3 text-danger text-center">Usuários</h1>
+                <h1 class="h5 text-danger text-center">Usuários</h1>
                 <form action="" method="POST">
                     <div class="form-group">
                         <p class="text-info"><span class="text-danger">Logado como:</span> {{ var.session_name }}</p>
@@ -33,32 +33,42 @@
                     <input type="hidden" name="id">
                     <input type="date" name="date" required>
                     <input type="text" name="credits" placeholder="Créditos...">
-                    <label for="author" class="text-info">Autor</label>
+                    <label for="author" class="h5 text-secondary">Autor</label>
                     <input type="text" name="author" id="author" value="{{ var.session_name }}"><br>
-                    <label for="category" class="text-info">selecione a categoria da postagem</label>
+                
+                    <label class="h5 text-secondary">selecione a categoria da postagem</label><br>
                     <select name="category" id="category" class="form-control">
                         {# opçoes renderizadas dinamicamente com java script apartir do menu #}
                     </select>
-                    <label class="text-info">Escreva um titulo</label>
-                    <textarea type="text" name="title" placeholder="TITULO: maximo de 150 caracteres" maxlength="150" class="form-control" required></textarea>
-                    <label for="text" class="text-info" aria-required="true">Escreva a matéria abaixo
-                        <span class="text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
+                    <label class="h5 text-secondary">Escreva um titulo</label>
+                    <input type="text" name="title" placeholder="TITULO: maximo de 150 caracteres" maxlength="150" class="form-control" required></input>
+                   
+                    <label for="text" class="h3 text-secondary" aria-required="true">Escreva a matéria abaixo
+                        <span class="h6 text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
                     </label>
                     <textarea name="text" id="text" cols="30" rows="20" class="form-control"></textarea>
-                    <h1 class="h4 text-info text-center">Insira códigos personalizados a postagem</h1>
-                    <p class="h6 text-secondary">insira links, imagens, propagandas, videos e muito mais atravéz desta area.</p>
-                    <span class="h6 text-secondary">clique na área para ver o código</span>
+                    <h1 class="h5 text-secondary text-center">Insira códigos personalizados a postagem</h1>
                      <!-- Create a simple CodeMirror instance -->
-                    <textarea class="code-area" name="code" title="Edite codigos para a pagina"></textarea>
-                    <input type="file" name="image">
-                    &nbsp;&nbsp;<label class="text-info text-danger"for=""> ou link uma imagem da internet</label>
-                    <input type="text" name="link-image" placeholder="Cole o link aqui">
-                    <input type="button" value="Postar" class="btn btn-primary" id="posting">
-                    <input type="reset" value="Limpar" class="btn btn-secondary">
-                </form>
+                    <textarea class="code-area" cols="30" rows="15" name="code" title="Edite codigos para a pagina"></textarea><br>
+                    <input type="file" class="btn btn-primary btn-lg" name="image" id="image-btn">
+                    <input type="text" name="link-image" placeholder="Ou se preferir cole um link de imagem aqui" style="width: 30vw; margin-bottom: 5%;"><br>
+                    <input type="button" value="Postar" class="btn btn-primary form-control" id="posting"><br><br>
+                    <input type="reset" value="Limpar" class="btn btn-secondary form-control">
+                </form><br><br>
 
-                <h1 class="h4">dicas para não bagunçar a interface</h1>
+                <h1 class="h3">dicas para não bagunçar a interface</h1>
                 <div class="form-control">
+                    <p>use classes bootstrap para formatar textos, imagens, botões, links etc. Use atributos pré montados com [data]
+                        para alinhar imagens com maior facilidade. <br>
+                        <span class="text-danger">[data-page]</span> = imagem padrão centralizada à postagem. <br>
+                        <span class="text-danger">[data-page="left"]</span> = para imagens de 300px flutantes à esquerda. <br>
+                        <span class="text-danger">[data-page="right"]</span> = para imagens de 300px flutantes à direita. <br>
+                        <span class="text-danger">[data-page="ads-both"]</span> = para imagens de propaganda estreita no meio da postagem (200px largura). <br>
+                        <span class="text-danger">[data-page="ads-left"]</span> = para imagens estreitas de propaganda à esquerda da postagem (300px largura). <br>
+                        <span class="text-danger">[data-page]="ads-right"</span> = para imagagens estreitas de propaganda à direita (300px largura). <br>
+                        <span class="text-danger">[data-page]="ads-top"</span> = para imagens de propaganda larga acima da postagem (200px altura, fixo). <br>
+                    </p>
+                    <p class="h6 text-secondary">Veja abaixo algumas colas de estilo</p>
                     <span><a href="#" class="text-primary">Primary link</a></span>
                     <span><a href="#" class="text-secondary">Secondary link</a></span>
                     <span><a href="#" class="text-success">Success link</a></span>
@@ -118,6 +128,7 @@
     <script src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
     <script src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
     <script src="{{ url_for('static', filename='codemirror/addon/hint/show-hint.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/keymap/vim.js') }}"></script>
     <script>
         var area = document.querySelector(".code-area");
         var edito = CodeMirror.fromTextArea(area, {
@@ -149,9 +160,9 @@ function editor(e){
     postPoste.value = e.querySelector("[name=post]").value;
     imagePoste.value = e.querySelector("[name=image]").value;
     credits.value = e.querySelector("[name=credits]").value;
-    edito.getDoc().setValue(e.querySelector("[name=code]").value);
+    var txt = e.querySelector("[name=code]").value.replace(/\r/, "");
+    edito.getDoc().setValue(txt.replace(/\n/g, ""));
     cols.click()
-    area.click()
 }
     </script>
 {% endblock %}

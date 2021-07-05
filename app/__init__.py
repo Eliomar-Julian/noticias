@@ -23,4 +23,4 @@ def logon(session):
 
 @app.route("/<category>/<title>", methods=["GET", "POST"])
 def open_page(category, title):
-    return query_news(category=category, title=title)
+    return query_news(category, title)

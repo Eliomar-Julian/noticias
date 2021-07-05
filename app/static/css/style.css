@@ -8,15 +8,6 @@
     display: none;
 }
 
-#hamburguer div{
-    width: 7%;
-    background-color: white;
-    height: 3px;
-    margin: 5px;
-    border-radius: 5px;
-
-}
-
 [data-menu]:hover{
     color: #E92049;
     transition: ease-in-out 0.5s;
@@ -48,6 +39,12 @@
     word-wrap: break-word;
 }
 
+/*-------------footer ------------------------*/
+
+#footer{
+    margin-top: 15%;
+}
+
 /* ----------ultimas -----------------------*/
 [data-sub]{
     border-collapse: collapse;
@@ -75,9 +72,13 @@
     max-height: 100%;
 }
 [data-h1]{
-    background-color: white;
-    border-radius: 5px;
+    background-color: transparent;
+    border-radius: 0px 10px 10px 0px;
     padding: 1%;
+    position: absolute;
+    background-color: #0a0a0a77;
+    margin-top: 5%; 
+    width: 38%;
 }
 #content{
     width: 98%;
@@ -88,8 +89,8 @@
 [data-sub=div]{
     width: 20%;
     color: black;
-    height: 45vh;
-    max-height: 45vh;
+    height: 50vh;
+    max-height: 50vh;
     padding: 5px;
     margin-top: 5%;
     border-collapse: collapse;
@@ -190,7 +191,8 @@ label{
 .posts{
     width: 40%;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 15%;
+    margin-bottom: 5%;
     text-align: left;
     display: block;
     align-items: center;
@@ -215,12 +217,9 @@ label{
     width: 40vw;
     height: auto;
 }
-img {
-    width: 40vw;
-    height: auto;
-}
+
 /* adaptando a tela --responsividade -- */
-@media only screen and (max-width: 900px){
+@media (max-width: 900px){
     [data-article=article]{
         display: none;
     }
@@ -239,6 +238,9 @@ img {
         word-wrap: normal;
         word-break: normal;
         text-decoration: none;
+        position: relative;
+        width: auto;
+        
     }
     [data-sub=div]{
         float: none;
@@ -262,6 +264,7 @@ img {
         float: none;
         max-width: none;
         border-bottom: 1px solid rgba(128, 128, 128, 0.469);
+        margin-bottom: 40%;
     }
     a{
         text-decoration: none;
@@ -286,6 +289,94 @@ img {
     nav{
         display: none;
     }
+    [data-page="ads-right"]{
+        display: none;
+    }
+    [data-page="ads-left"]{
+        display: none;
+    }
     
 }
 
+/* ------------posicionando imagens na postagem -------------------------*/
+
+[data-page=left]{
+    width: 300px;
+    float: left;
+    height: auto;
+    max-width: 300px;
+    margin: 1%;
+}
+[data-page=left] img{
+    width: 100%;
+    height: 100%;
+}
+
+[data-page=right]{
+    max-width: 45vw;
+    width: 40vw;
+    float: right;
+    height: auto;
+    margin: 1%;
+}
+[data-page=right] img{
+    width: 100%;
+    height: 100%;
+}
+
+[data-page=ads-both]{
+    width: 100%;
+    max-height: 200px;
+    border: 1px solid black;
+}
+[data-page="ads-both"] img{
+    width: max-content;
+    height: max-content;
+}
+
+[data-page=ads-left]{
+    width: 20vw;
+    max-width: 25vw;
+    height: auto;
+    position: absolute;
+    top: 45%;
+    left: 2%;
+}
+[data-page=ads-left] img{
+    width: max-content;
+    height: max-content;
+}
+
+
+[data-page=ads-right]{
+    width: 25vw;
+    max-width: 30vw;
+    height: auto;
+    position: absolute;
+    top: 45%;
+    right: 2%;
+}
+[data-page=ads-right] img{
+    width: max-content;
+    height: max-content;
+}
+
+[data-page=ads-top]{
+    width: 60vw;
+    height: 150px;
+    position: absolute;
+    top: 17%;
+    left: 20%;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    background-color: red;
+}
+[data-page=ads-top] img{
+    width: max-content;
+    height: max-content;
+    margin: auto;
+}
+[data-space]{
+    height: 16vh;
+}

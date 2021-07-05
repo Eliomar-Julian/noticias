@@ -1,4 +1,4 @@
-/* ----------------- animações do menu --------------------- */ 
+/* ----------------- animações do menu versão pc -------------------- */ 
 
 document.onwheel = roll; // funçoes para fixar o menu no topo da tela
 function roll(r){
@@ -8,24 +8,57 @@ function roll(r){
     let logo = document.querySelector("#logo");
     if(min > 0){
         menu.setAttribute("style", "transition: 2s; top: 0; position: fixed; width: 100%;")
-        menu.setAttribute("class", "navbar navbar-light bg-light");
+        menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-light");
         logo.setAttribute("style", "display: none;");
         items.forEach(function changeColor(change){
-            change.setAttribute("class", "navbar-brand text-danger text-xsm");
-            change.setAttribute("style", "transition: 1s;")
+            change.setAttribute("class", "navbar-brand text-dark");
+            change.setAttribute("style", "transition: 0.4s; border-bottom: 1px solid gray;")
+            
         })
     } 
     if(min === 0){
         menu.removeAttribute("style", "top");
         menu.setAttribute("style", "position: relative;");
-        menu.setAttribute("class", "navbar navbar-light bg-danger");
+        menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-danger");
         logo.setAttribute("style", "display: flex;");
         items.forEach(function reChangedColor(change){
             change.setAttribute("class", "navbar-brand text-light")
+            change.removeAttribute("style");
         })
     }
-
 }
+
+
+///* ----------------- animações do menu versão touch -------------------- */ 
+
+document.addEventListener("touchmove", detect);
+function detect(e){
+    if (window.pageYOffset > 0){
+        roll();
+    }
+    else{
+        roll();
+    }
+}
+
+// menu responsivo para telas estritas
+
+let hamburguer = document.querySelector(".navbar-toggler");
+let expandir = document.querySelector(".collapse.navbar-collapse");
+var show = false;
+hamburguer.addEventListener("click", revelar);
+function revelar(){
+  if (show == false){
+    expandir.classList.add("d-block");
+    expandir.setAttribute("style", "transition: all 2s;")
+    show = true;
+  }
+  else{
+    expandir.classList.remove("d-block");
+    show = false;
+  }
+  
+};
 
 /* -----------manipulando ajax de login ------------------- */
 // troca de mensagens por baixo do pano entre cliente e servidor...
@@ -58,39 +91,3 @@ $("#btn-login").click(function(event) {
         }
     })
 })
-
-// menu
-var x = screen.width;
-let openNav = false;
-if (x <= 800){
-    let navbar = document.querySelector("nav");
-    var nav = navbar.querySelector(".container-fluid");
-    let links = nav.querySelectorAll("a");
-    let form = navbar.querySelector("[class=d-flex]");
-    let button = navbar.querySelector("button");
-    let hamburguer = navbar.querySelector("#hamburguer");
-    
-    hide();
-    hamburguer.style.display = "block";
-    navbar.addEventListener("click", alterHeight);
-    
-    function hide(){
-        links.forEach(function foo(e){
-            e.setAttribute("style", "visibility: hidden; width: min-content;");
-        })
-        button.style.display="none";
-        form[0].style.display="none";
-        nav.style.display = "block";
-        nav.style.height = "20pt";
-}
-    
-    function alterHeight() {
-        nav.style.height = "auto";
-        links.forEach(function vai(e){
-            e.setAttribute("style", "visibility: visible; width: min-content;");
-        })
-        button.style.display="block";
-        form[0].style.display="block";
-        hamburguer.style.display = "none";
-    }
-}

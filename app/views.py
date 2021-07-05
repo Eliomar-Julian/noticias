@@ -200,8 +200,8 @@ def query_news(category: str=None, title: str=None):
         cur = DATABASE.query_like(search)
         return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
     data = DATABASE.get_table_data("noticias", "titulo", title)
-    outer = DATABASE.get_table_data("noticias", "categoria", category)
-    print(data)
+    outer = DATABASE.get_table_data("noticias", "categoria", category, all=True)
+    print(category)
     try:
         return render_template(
             "page.html", var={

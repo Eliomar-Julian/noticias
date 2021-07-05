@@ -7,7 +7,6 @@ class SQL:
     def __init__(self):
         path = os.path.realpath(os.path.dirname(__file__))
         path_full = os.path.join(path, "db/database.db")
-        print("PASTA___________________" + path_full)
         self.conn = sqlite3.connect(path_full, check_same_thread=False)
         self.cursor = self.conn.cursor()
 
@@ -47,7 +46,7 @@ class SQL:
         all: bool=False, 
         order: str = str()):
         select = self.cursor.execute(
-            f"SELECT * FROM {table} WHERE {col_name} = ?;", 
+            f"SELECT * FROM {table} WHERE {col_name} = ? LIMIT 50;", 
             [value,]
         )
         if all: return select.fetchall()

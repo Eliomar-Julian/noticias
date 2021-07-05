@@ -2,6 +2,15 @@
 {# pagina base que contem o menu e as linkages de css, bootstrap e javascript #}
 <html lang="pt-br">
 <head>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicons/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicons/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicons/favicon-16x16.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='img/favicons/site.webmanifest') }}">
+  <script src="{{ url_for('static', filename='jquery/dist/jquery.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/dist/css/bootstrap.min.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +19,8 @@
     </script>
 </head>
 <header>
-    <script src="{{ url_for('static', filename='jquery/dist/jquery.min.js') }}"></script>
-    <link rel="shortcut icon" href="../static/img/desenho.svg">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/dist/css/bootstrap.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <div class="logo" id="logo">
-      <a href="/"><img src="{{ url_for('static', filename='img/desenho.png') }}" alt="logo" 
+      <a href="/"><img src="{{ url_for('static', filename='img/FNLogo.jpeg') }}" alt="logo" 
         title="Fatimense Notícias" id="logotipo">
       </a>
       <a href="/"><img class="social" src="{{ url_for('static', filename='img/face.jpg') }}" 
@@ -28,36 +33,54 @@
         alt="youtube" title="Youtube" id="youtube-link">
       </a>
     </div>
-    <nav class="navbar navbar-light bg-danger" id="navbar">
-        <div class="container-fluid">
-          <div id="hamburguer">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <a href="/" data-menu="item" class="navbar-brand text-light">Últimas notícias</a>
-          <a href="/esporte" data-menu="item" class="navbar-brand text-light">Esporte</a>
-          <a href="/educacao"  data-menu="item" class="navbar-brand text-light">Educação</a>
-          <a href="/internacional" data-menu="item" class="navbar-brand text-light">Internacional</a>
-          <a href="/saude" data-menu="item" class="navbar-brand text-light">Saúde</a>
-          <a href="/politica" data-menu="item" class="navbar-brand text-light">Política</a>
-          <a href="/fazenda" data-menu="item" class="navbar-brand text-light">Fazenda</a>
-          <a href="/policial" data-menu="item" class="navbar-brand text-light">Policial</a>
-          <a href="/entretenimento" data-menu="item" class="navbar-brand text-light">Entretenimento</a>
-          <a href="/contato" data-menu="item" class="navbar-brand text-light">Contato</a>
-          <form class="d-flex" method="GET">
-            <input name="search" class="form-control me-2" type="search" placeholder="Procurar..." aria-label="Buscar">
-            <button class="btn btn-success" type="submit">Buscar</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-danger" id="navbar">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a href="/" data-menu="item" class="navbar-brand text-light">Últimas notícias</a>
+          </li>
+          <li class="nav-item">
+            <a href="/esporte" data-menu="item" class="navbar-brand text-light">Esporte</a>
+          </li>
+          <li class="nav-item">
+            <a href="/mundo" data-menu="item" class="navbar-brand text-light">Mundo</a>
+          </li>
+          <li class="nav-item">
+            <a href="/politica" data-menu="item" class="navbar-brand text-light">Política</a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/economia" data-menu="item" class="navbar-brand text-light">Ecônomia</a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="/regiao" data-menu="item" class="navbar-brand text-light">Região</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/outras" data-menu="item" class="navbar-brand text-light">Outros</a>
+          </li>
+          <li class="nav-item">
+            <a href="/contato" data-menu="item" class="navbar-brand text-light">Contato</a>
+          </li>
+          <form class="form-flex d-flex" method="GET">
+            <input name="search" class="form-control-sm-2" type="search" placeholder="Procurar..." aria-label="Buscar">
+            <button class="btn btn-success btn-sm-2" type="submit">Buscar</button>
           </form>
-        </div>
+        </ul>
+      </div>
     </nav>    
 </header>
+
 <body>
 {% block body %}
     {# --------corpo da pagina ----------------------- #}
 {% endblock %}
 <div style="height: 1000pt;"></div>
-<footer>
+<footer id="footer">
   <div class="bg-danger" id="footer" style="width: 100vw;">
     <br><br><br><br><br><br><br>
   </div>
