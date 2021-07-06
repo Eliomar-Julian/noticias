@@ -7,12 +7,14 @@ function roll(r){
     let min = window.pageYOffset;
     let logo = document.querySelector("#logo");
     if(min > 0){
-        menu.setAttribute("style", "transition: 2s; top: 0; position: fixed; width: 100%;")
-        menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-light");
-        logo.setAttribute("style", "display: none;");
+        menu.setAttribute("style", "transition: 2s; position: fixed; width: 100%; top: 0;");
+        if(window.innerWidth > 900){
+            menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-light");
+        }
+        console.log(window.innerWidth);
+        logo.setAttribute("style", "opacity: 0%; transiton: 1s;");
         items.forEach(function changeColor(change){
             change.setAttribute("class", "navbar-brand text-dark");
-            change.setAttribute("style", "transition: 0.4s; border-bottom: 1px solid gray;")
             
         })
     } 
@@ -20,7 +22,7 @@ function roll(r){
         menu.removeAttribute("style", "top");
         menu.setAttribute("style", "position: relative;");
         menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-danger");
-        logo.setAttribute("style", "display: flex;");
+        logo.setAttribute("style", "opacity: 100%; transition: 1s;");
         items.forEach(function reChangedColor(change){
             change.setAttribute("class", "navbar-brand text-light")
             change.removeAttribute("style");
@@ -47,6 +49,7 @@ let hamburguer = document.querySelector(".navbar-toggler");
 let expandir = document.querySelector(".collapse.navbar-collapse");
 var show = false;
 hamburguer.addEventListener("click", revelar);
+hamburguer.style.backgroundColor = "white";
 function revelar(){
   if (show == false){
     expandir.classList.add("d-block");

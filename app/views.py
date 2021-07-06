@@ -48,7 +48,7 @@ def open_page_category(category):
 # // função em thread que expira a sessão **precisa ser trabalhada**...
 # fix: não expira se o servidro for interrompido
 def expire(args):
-    timer = 3600
+    timer = 360
     for t in range(timer): 
         timer -= 1; sleep(1)
     DATABASE.delete_table("sessions", "sessions_hash", args)
@@ -56,7 +56,7 @@ def expire(args):
 
 # // recebe uma variavel string e gera uma hash gerador de hashs md5
 def generate_hash(element: str) -> typing.Hashable:
-    return hashlib.md5(bytes(element, "utf-8")).hexdigest()
+    return hashlib.sha256(bytes(element, "utf-8")).hexdigest()
 
 
 # // abre a tela de login e suas interações ** manipula login**
@@ -65,8 +65,10 @@ def login():
     user_ip = request.remote_addr
     user_session_prepare = user_agent + user_ip
     user_cookie = request.cookies.get("FNAdmin")
-    print(user_cookie)
-    user_session_finnaly = generate_hash(user_session_prepare + user_cookie if user_cookie else "")
+    if user_cookie:
+        user_session_finnaly = generate_hash(user_session_prepare + user_cookie)
+    else: 
+        user_session_finnaly = generate_hash(user_session_prepare)
     is_logon = DATABASE.get_table_data(
         "sessions", 
         "sessions_hash", 
@@ -102,10 +104,11 @@ def login():
                     target=expire, daemon=True, args=[user_session_finnaly]
                 ).start()
             return jsonify(message="success", session=user_session_finnaly)
+
     try:
-        if user_session_finnaly == is_logon[1]:
+        if user_session_finnaly == is_logon[1]: # verifica se ainda há uma sessão aberta
             return redirect("/admin/" + user_session_finnaly)
-    except Exception as e:
+    except TypeError:
         return render_template("login.html")
 
 
@@ -121,6 +124,7 @@ def login_on(session):
         author = request.form.get("author")
         category = request.form.get("category")
         title = request.form.get("title")
+        sub_title = request.form.get("sub-title")
         text = request.form.get("text")
         photos = request.files.get("image")
         link_image = request.form.get("link-image")
@@ -156,10 +160,10 @@ def login_on(session):
                 DATABASE.insert_in_table(
                     "noticias", (
                         "data", "autor", "categoria", 
-                        "titulo", "materia", "foto", "creditos", "codigo"
+                        "titulo", "materia", "foto", "creditos", "codigo", "sub_titulo"
                     ), (
                         date, author, category, 
-                        title, text, photo, credits_, code
+                        title, text, photo, credits_, code, sub_title
                     )
                 )
             else:
@@ -167,9 +171,9 @@ def login_on(session):
                     """
                     UPDATE noticias SET data = ?, 
                     autor = ?, categoria = ?, titulo = ?, 
-                    materia = ?, foto = ?, creditos = ?, codigo = ? WHERE id = ?;""", [
+                    materia = ?, foto = ?, creditos = ?, codigo = ?, sub_titulo = ? WHERE id = ?;""", [
                         date, author, category, 
-                        title, text, photo, credits_, code, id_
+                        title, text, photo, credits_, code, sub_title, id_
                         ]
                     )
             return redirect(f"/{category}/{title}")
@@ -191,7 +195,7 @@ def login_on(session):
             resp.set_cookie("FNAdmin", yes[0])
             return resp
     except Exception as e:
-        return "Sessão expirada ou token invalido"
+        return '<h6 style="color: red;">Sessão expirada ou token invalido...</h6>'
 
 # // buscando noticias no banco de dados....
 def query_news(category: str=None, title: str=None):
@@ -201,7 +205,6 @@ def query_news(category: str=None, title: str=None):
         return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category, all=True)
-    print(category)
     try:
         return render_template(
             "page.html", var={
@@ -214,6 +217,7 @@ def query_news(category: str=None, title: str=None):
                 "photos": data[6],
                 "credits": data[7],
                 "code": data[8],
+                "sub": data[9],
                 "outer": outer
             }
         )

@@ -6,14 +6,16 @@
         <article>
             <div data-space class="container container-fluid"></div>
             <h1 class="h1 text-dark text-left">{{ var.title }}</h1>
+            <p class="h4 text-secondary">{{ var.sub }}</p>
             <div style="font-size: small; display: inline-flexbox; margin-bottom: 5%;">
                 <p style="padding: 0px; margin: 0px;" class="text-info">Data: <span class="text-secondary">{{ var.date }}</span></p>
                 <p style="padding: 0px; margin: 0px;" class="text-info">Editor: <span class="text-secondary">{{ var.author }}</span></p>
-                <p style="padding: 0px; margin: 0px;" class="text-info">Créditos: 
-                    {% if var.credits %}<span class="text-secondary">{{ var.credits|safe }}</span>{% endif %}
+                <p style="padding: 0px; margin: 0px; display: flex;" class="text-info">Créditos: 
+                    {% if var.credits %}<span>{{ var.credits|safe }}</span>{% endif %}
                 </p>
             </div>
             <div class="body-post">
+                
                 <p>{{ var.text|safe }}{{ var.code|safe }}</p>
             </div>
             <div id="photos-page">
@@ -35,7 +37,7 @@
                     <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
                     <h1 class="h6 text-dark text-left" data-h2>{{ tuples.4|upper }}</h1>
                     <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
-                    <p data-article="article" class="text-success text-center">{{ tuples.5[:75] }}...</p>
+                    <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}...</p>
                 </div>
             {% else %}
             <div data-sub="div" class="btn btn-light">
@@ -43,7 +45,7 @@
                     src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
                 <h1 class="h6 text-dark text-left" data-h2>{{ tuples[4]|upper }}</h1>
                 <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
-                <p data-article="article" class="text-success text-center">{{ tuples.5[:75] }}...</p>
+                <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}...</p>
             </div>
             {% endif %}
         </a>
@@ -56,4 +58,5 @@
             margin-top: 2%;
         }
     </style>
+    
 {% endblock %}

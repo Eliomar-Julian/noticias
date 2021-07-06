@@ -42,7 +42,7 @@
                     </select>
                     <label class="h5 text-secondary">Escreva um titulo</label>
                     <input type="text" name="title" placeholder="TITULO: maximo de 150 caracteres" maxlength="150" class="form-control" required></input>
-                   
+                    <input type="text" name="sub-title" placeholder="Aqui um sub-título" class="form-control" required>
                     <label for="text" class="h3 text-secondary" aria-required="true">Escreva a matéria abaixo
                         <span class="h6 text-danger">use HTML e CSS para linkar imagens e vídeos e outras elementos.</span> 
                     </label>
@@ -60,6 +60,7 @@
                 <div class="form-control">
                     <p>use classes bootstrap para formatar textos, imagens, botões, links etc. Use atributos pré montados com [data]
                         para alinhar imagens com maior facilidade. <br>
+                        <span class="text-danger">".mx-auto", ".image-fluid" e ".container-fluid"</span> = para imagens e conteiners adaptativos. <br>
                         <span class="text-danger">[data-page]</span> = imagem padrão centralizada à postagem. <br>
                         <span class="text-danger">[data-page="left"]</span> = para imagens de 300px flutantes à esquerda. <br>
                         <span class="text-danger">[data-page="right"]</span> = para imagens de 300px flutantes à direita. <br>
@@ -104,6 +105,7 @@
                                         <input type="hidden" name="date" value="{{ info.1 }}">
                                         <input type="hidden" name="category" value="{{ info.3 }}">
                                         <input type="hidden" name="title" value="{{ info.4 }}">
+                                        <input type="hidden" name="sub-title" value="{{ info.9 }}">
                                         <input type="hidden" name="post" value="{{ info.5 }}">
                                         <input type="hidden" name="image" value="{{ info.6 }}">
                                         <input type="hidden" name="credits" value="{{ info.7 }}">
@@ -127,15 +129,19 @@
     <script src="{{ url_for('static', filename='js/post.js') }}"></script>
     <script src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
     <script src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/mode/htmlembedded/htmlembedded.js') }}"></script>
     <script src="{{ url_for('static', filename='codemirror/addon/hint/show-hint.js') }}"></script>
     <script src="{{ url_for('static', filename='codemirror/keymap/vim.js') }}"></script>
     <script>
         var area = document.querySelector(".code-area");
         var edito = CodeMirror.fromTextArea(area, {
             theme: "dracula",
-            mode: "xml",
+            mode: "htmlmixed",
             text: "show-hint",
             indentWithTabs: true,
+            showCursorWhenSelecting: true,
+            lineWrapping: true,
             lineNumbers: false,
         });
         
@@ -148,6 +154,7 @@ function editor(e){
     datePoste = document.querySelector("[name=date]");
     categoryPoste = document.querySelector("[name=category]");
     titlePoste = document.querySelector("[name=title]");
+    subtitlePoste = document.querySelector("[name=sub-title]");
     postPoste = document.querySelector("[name=text]");
     imagePoste = document.querySelector("[name=link-image]");
     credits = document.querySelector("[name=credits]");
@@ -157,6 +164,7 @@ function editor(e){
     datePoste.value = e.querySelector("[name=date]").value;
     categoryPoste.value = e.querySelector("[name=category]").value;
     titlePoste.value = e.querySelector("[name=title]").value;
+    subtitlePoste.value = e.querySelector("[name=sub-title]").value;
     postPoste.value = e.querySelector("[name=post]").value;
     imagePoste.value = e.querySelector("[name=image]").value;
     credits.value = e.querySelector("[name=credits]").value;
