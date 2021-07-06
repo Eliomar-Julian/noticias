@@ -9,12 +9,14 @@
 }
 
 [data-menu]:hover{
-    color: #E92049;
     transition: ease-in-out 0.5s;
     background-color: rgba(255, 255, 255, 0.272);
+    text-shadow: 1px 1px 5px white;
 }
 [data-menu]{
-    transition: 1s;
+    transition: 0.4s;
+    padding: 3%;
+    border-radius: 5px;
 }
 
 #logo{
@@ -26,12 +28,12 @@
 
 }
 #logotipo{
-    width: 100px;
-    height: 50px;
+    width: 15vw;
+    height: auto;
 }
 .social{
-    width: 25px;
-    height: 25px;
+    width: 5vw;
+    height: auto;
     border-radius: 5px;
     padding-left: 1%;
 }
@@ -46,6 +48,10 @@
 }
 
 /* ----------ultimas -----------------------*/
+
+[data-ocult="true"]{
+    display: none;
+}
 [data-sub]{
     border-collapse: collapse;
 }
@@ -98,6 +104,21 @@
     text-align: left;
     margin-left: 1%;
     display: inline-block;
+    transition: 0.3s;
+    
+}
+[data-h1]:hover{
+    background-color: #0a0a0ac0;
+    transition: 0.5s;
+    z-index: 1;
+}
+[data-h1]:hover + [data-f]{
+    filter: blur(1px);
+    transition: 0.3s;
+    z-index: -1;
+}
+[data-sub=div]:hover {
+    box-shadow: 1px 1px 5px rgba(7, 7, 7, 0.356);
 }
 
 /* ------------- tela de login ----------- */
@@ -219,7 +240,10 @@ label{
 }
 
 /* adaptando a tela --responsividade -- */
-@media (max-width: 900px){
+@media (max-width: 670px){
+    [data-ocult="true"]{
+        display: block;
+    }
     [data-article=article]{
         display: none;
     }
@@ -257,15 +281,7 @@ label{
         height: 200px;
     }
     #first-post{
-        width: 80%;
-        position: relative;
-        z-index: -1;
-        margin: auto;
-        float: none;
-        max-width: none;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.469);
-        margin: auto;
-        height: max-content;
+        display: none;
     }
     #first-post [data-f]{
         margin-bottom: 0px;
@@ -367,7 +383,7 @@ label{
     height: 150px;
     max-height: 200px;
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 20%;
     z-index: -1;
     display: flex;
@@ -385,4 +401,29 @@ label{
     height: max-content;
     max-height: 150px;
     border-collapse: collapse;
+}
+
+
+/* -------------    Rodapé ---------------------------------------------*/
+
+#footer{
+    height: 40vh;
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+}
+#logo-rodape{
+    width: 45vw;
+    height: auto;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+#logo-main{
+    width: 10vw;
+    filter: brightness(0);
+}
+.icone{
+    margin: auto;
 }
