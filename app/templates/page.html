@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
-{# renderiza as paginas clicadas #}
+<!--------------------- renderiza as paginas clicadas ----------------------->
     <title>{{ var.title }}</title>
+    
+    <!--Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+    <meta property="og:url"           content="http://sisalnews.com.br/{{ var.category }}/{{ var.title }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ var.title }}" />
+    <meta property="og:description"   content="{{ var.sub }}" />
+    <meta property="og:image"         content="https://eliomar55.pythonanywhere.com/static/img/FNLogo.jpeg" />
+    
+<!-------------------- Corpo da postagem ------------------------------------------>
     <div class="posts">
         <article>
             <div data-space class="container container-fluid"></div>
@@ -14,6 +23,30 @@
                     {% if var.credits %}<span>{{ var.credits|safe }}</span>{% endif %}
                 </p>
             </div>
+            <div id="share-div" class="container rounded">
+                <!----   -------- ---    facebook compartilhar------------------------->
+                <div class="container-fluid mx-auto">
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0" 
+                        nonce="GrpPCC1v">
+                    </script>
+                    <div class="fb-share-button" data-href="http://www.sisalnews.com.br/{{ var.category }}/{{ var.title }}" data-layout="button" 
+                        data-size="large">
+                            <a target="_blank" 
+                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" 
+                                class="fb-xfbml-parse-ignore">Compartilhar
+                            </a>
+                    </div>
+                </div>
+
+                <!------------------ botão twitter------------------------------------->
+                <div class="container-fluid mx-auto">
+                    <div></div>
+                    <a class="twitter-share-button" data-size="large" data-text="{{ var.title }}" data-via="{{ var.author }}"
+                    href="https://twitter.com/intent/tweet" lang="pt-br">
+                    Tweet</a>
+                </div>
+            </div>
             <div class="body-post">
                 
                 <p>{{ var.text|safe }}{{ var.code|safe }}</p>
@@ -21,12 +54,18 @@
             <div id="photos-page">
                 {% if var.photos[:4] == 'http' %}
                     <img data-page src="{{ var.photos }}" alt="{{ var.photos }}">
+                    
                 {% else %}
                     <img data-page src="{{ url_for('static', filename='img/upload/' + var.photos) }}" alt="{{ var.photos }}">
+                    
                 {% endif %}
             </div>
         </article>
     </div>
+
+    
+
+<!------------------ Mais noticias relacionadas ------------------------>
     <div>
         <h1 class="h3 text-dark text-center" style="margin-top: 10%;">Veja mais relacionados...</h1><hr>
         {% for tuples in var.outer %}
@@ -35,6 +74,7 @@
             {% if tuples[6][:4] == 'http' %}
                 <div data-sub="div" class="btn btn-outline-light">
                     <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
+                    
                     <h1 class="h6 text-dark text-left" data-h2>{{ tuples.4|upper }}</h1>
                     <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
                     <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}...</p>
@@ -43,6 +83,7 @@
             <div data-sub="div" class="btn btn-light">
                 <img data-s class="rounded float-left" width="250" height="200" 
                     src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
+                    
                 <h1 class="h6 text-dark text-left" data-h2>{{ tuples[4]|upper }}</h1>
                 <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
                 <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}...</p>
@@ -58,5 +99,5 @@
             margin-top: 2%;
         }
     </style>
-    
+<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>  
 {% endblock %}
