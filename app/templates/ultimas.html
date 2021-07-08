@@ -14,7 +14,7 @@
                             {% if tuples[6][:4]  == 'http' %}
                                 <img data-f class="rounded" src="{{ tuples.6 }}" alt="{{ tuples[6] }}">
                             {% else %}
-                                <img data-f class="rounded" width="400" height="350" 
+                                <img data-f class="rounded"  
                                     src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="">
                             {% endif %}
                             <p data-data id="data" class="h5 text-info">{{ tuples[1] }}</p>
@@ -25,15 +25,15 @@
                 <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}" data-ocult="true">
                     {% if tuples[6][:4] == 'http' %}
                         <div data-sub="div" class="btn btn-outline-light">
-                            <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
-                            <h1 style="width: 10;" class="h6 text-secondary text-left" data-h2>{{ tuples.4|upper }}</h1>
+                            <img data-s class="rounded float-left"  src="{{ tuples.6 }}" alt="">
+                            <h1 class="h6 text-secondary text-left" data-h2>{{ tuples.4|upper }}</h1>
                             <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
                             <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}</p>
                         </div>
                     {% else %}
                     <!------------- Demais posts para thumbnail interno--------------------------------->
                     <div data-sub="div" class="btn btn-light">
-                        <img data-s class="rounded float-left" width="250" height="200" 
+                        <img data-s class="rounded float-left" 
                             src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
                         <h1 class="h6 text-secondary text-left" data-h1>{{ tuples[4]|upper }}</h1>
                         <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
@@ -50,7 +50,7 @@
                 <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
                     {% if tuples[6][:4] == 'http' %}
                         <div data-sub="div" class="btn btn-outline-light">
-                            <img data-s class="rounded float-left" width="250" height="200" src="{{ tuples.6 }}" alt="">
+                            <img data-s class="rounded float-left" src="{{ tuples.6 }}" alt="">
                             <h1 style="width: 10;" class="h6 text-secondary text-left" data-h2>{{ tuples.4|upper }}</h1>
                             <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
                             <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}</p>
@@ -58,7 +58,7 @@
                     {% else %}
                     <!------------- Demais posts para thumbnail interno--------------------------------->
                     <div data-sub="div" class="btn btn-light">
-                        <img data-s class="rounded float-left" width="250" height="200" 
+                        <img data-s class="rounded float-left"
                             src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
                         <h1 class="h6 text-secondary text-left" data-h1>{{ tuples[4]|upper }}</h1>
                         <p data-data class="h6 text-info text-center">{{ tuples[1] }}</p>
