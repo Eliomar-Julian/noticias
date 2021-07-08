@@ -37,6 +37,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <div id="logo-menu" class="container-fluid"><img class="img-fluid mx-auto" src="{{ url_for('static', filename='img/FNLogo.png') }}"></div>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
@@ -80,13 +81,15 @@
     {# --------corpo da pagina ----------------------- #}
 {% endblock %}
 </main>
-<div class="container-fluid"></div>
+<div data-ads="google ads" class="container"></div>
 <footer>
-  <div id="footer" class="bg-danger" class="container-fluid">
+  <div id="footer" class="container-fluid bg-danger">
     <div class="container-fluid mx-auto bg-danger rounded" id="logo-rodape">
       <a href="/" class="icone"><img src="{{ url_for('static', filename='img/FNLogo.png') }}" alt="logo" id="logo-main"
         title="Fatimense Notícias" >
       </a>
+    </div>
+    <div class="container-fluid">
       <a class="icone" href="https://www.facebook.com/EliomarJulian" target="_blank"><img class="social" src="{{ url_for('static', filename='img/face.png') }}" 
           alt="face" title="Facebook" id="face-link">
       </a>
@@ -96,8 +99,11 @@
       <a class="icone" href="https://www.youtube.com/channel/UCivrjG20ZJZtlAIgP0OcDaA" target="_blank"><img class="social" src="{{ url_for('static', filename='img/youtube.png') }}" 
         alt="youtube" title="Youtube" id="youtube-link">
       </a>
+    </div>
+    <div class="container-fluid mx-auto">
       <h3 class="h6 text-light">Fatimense News | 2021</h3> <p class="text-dark"></p>&copy;Todos os direitos reservados</p>
     </div>
+    <div class="container-fluid mx-auto"></div>
   </div>
 </footer>
 <script src="{{ url_for('static', filename='bootstrap/dist/js/bootstrap.min.js') }}"></script>

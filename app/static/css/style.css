@@ -7,6 +7,13 @@
     width: 100%;
     display: none;
 }
+#logo-menu{
+    width: 45vw;;
+    height: auto;
+    margin: auto;
+    transition: 0.5s;
+    display: none;
+}
 
 [data-menu]:hover{
     transition: ease-in-out 0.5s;
@@ -240,7 +247,10 @@ label{
 }
 
 /* adaptando a tela --responsividade -- */
-@media (max-width: 670px){
+@media (max-width: 900px){
+    #logo-menu{
+        display: block;
+    }
     [data-ocult="true"]{
         display: block;
     }
@@ -318,14 +328,22 @@ label{
     [data-page="ads-left"]{
         display: none;
     }
-    .img{
-        width: 100%;
-        height: auto;
+    [data-page=ads-top]{
+        margin-top: 1%;
+        max-height: 100px;
+        height: 50px;
+        background-color: transparent;
+    }
+    #logotipo {
+        width: 30vw;
+    }
+    .social{
+        width: 15vw;
     }
     
 }
 
-/* ------------posicionando imagens na postagem -------------------------*/
+/* ------------posicionando imagens na postagem ------------------*/
 
 [data-page=left]{
     width: 300px;
@@ -354,12 +372,13 @@ label{
     margin: auto;
 }
 
+/* ---------- posicionando divs propagandas personalizadas -----------------*/
 [data-page=ads-left]{
     width: 25vw;
     max-width: 30vw;
     height: auto;
     position: absolute;
-    top: 45%;
+    top: 70vh;
     left: 2%;
     z-index: -1;
 }
@@ -370,7 +389,7 @@ label{
     max-width: 30vw;
     height: auto;
     position: absolute;
-    top: 45%;
+    top: 70vh;
     right: 2%;
     background-color: transparent;
     z-index: -1;
@@ -379,11 +398,10 @@ label{
 
 [data-page=ads-top]{
     width: 60vw;
-    max-width: 80vw;
     height: 150px;
     max-height: 200px;
     position: absolute;
-    top: 25%;
+    top: 16%;
     left: 20%;
     z-index: -1;
     display: flex;
@@ -397,10 +415,9 @@ label{
 }
 .img{
     margin: auto;
-    width: auto;
-    height: max-content;
-    max-height: 150px;
-    border-collapse: collapse;
+    width: 100%;
+    margin-top: 0%;
+    height: auto;
 }
 
 
@@ -408,12 +425,13 @@ label{
 
 #footer{
     height: 40vh;
-    margin-top: 10%;
     display: flex;
     align-items: center;
+    margin-bottom: -15%;
+    margin-top: 10%;
 }
 #logo-rodape{
-    width: 45vw;
+    width: auto;
     height: auto;
     margin: auto;
     display: flex;
@@ -421,9 +439,13 @@ label{
     margin: auto;
 }
 #logo-main{
-    width: 10vw;
+    width: 30vw;
     filter: brightness(0);
 }
 .icone{
-    margin: auto;
+    margin: 0%;
+}
+.letras {
+    width: max-content;
+    margin-bottom: 0px;
 }

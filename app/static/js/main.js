@@ -1,17 +1,20 @@
 /* ----------------- animações do menu versão pc -------------------- */ 
 
 document.onwheel = roll; // funçoes para fixar o menu no topo da tela
+var logoMenu = document.querySelector("#logo-menu");
+logoMenu.style = "opacity: 0%;";
 function roll(r){
     let menu = document.querySelector("#navbar");
     let items = document.querySelectorAll("[data-menu=item]");
     let min = window.pageYOffset;
     let logo = document.querySelector("#logo");
     if(min > 0){
-        menu.setAttribute("style", "transition: 2s; position: fixed; width: 100%; top: 0;");
+        menu.setAttribute("style", "transition: 2s; width: 100%; top: 0; position: fixed;");
         if(window.innerWidth > 900){
             menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-light");
+            
         }
-        console.log(window.innerWidth);
+        logoMenu.setAttribute("style", "opacity: 100%;");
         logo.setAttribute("style", "opacity: 0%; transiton: 1s;");
         items.forEach(function changeColor(change){
             change.setAttribute("class", "navbar-brand text-dark");
@@ -20,6 +23,7 @@ function roll(r){
     } 
     if(min === 0){
         menu.removeAttribute("style", "top");
+        logoMenu.setAttribute("style", "opacity: 0%;");
         menu.setAttribute("style", "position: relative;");
         menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-danger");
         logo.setAttribute("style", "opacity: 100%; transition: 1s;");
