@@ -8,7 +8,7 @@
     display: none;
 }
 #logo-menu{
-    width: 15vw;;
+    width: 25vw;;
     height: auto;
     margin: auto;
     transition: 0.5s;
@@ -248,7 +248,16 @@ label{
 }
 
 /* adaptando a tela --responsividade -- */
-@media (max-width: 700px){
+@media(max-width: 900px){
+    [data-sub=div]{
+        margin: auto;
+        margin-top: 10%;
+    }
+    [data-article=article]{
+        display: none;
+    }
+}
+@media (max-width: 600px){
     #logo-menu{
         display: block;
     }
@@ -281,15 +290,14 @@ label{
         float: none;
         display: block;
         width: 60%;
-        height: auto;
+        height: 100%;
         margin: auto;
         margin-top: 5%;
         margin-bottom: 20%;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.469);
-        border-bottom-width: 90%;
     }
     [data-s]{
-        height: 200px;
+        width: 100%;
+        height: auto;
     }
     #first-post{
         display: none;
@@ -341,8 +349,9 @@ label{
     .social{
         width: 15vw;
     }
-    
+
 }
+
 
 /* ------------posicionando imagens na postagem ------------------*/
 
@@ -413,6 +422,7 @@ label{
 
 [data-space]{
     height: 16vh;
+    margin-bottom: 5%;
 }
 .img{
     margin: auto;

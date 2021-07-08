@@ -34,30 +34,5 @@ pst.addEventListener("click", (e) => {
 
 
 
-tool1.addEventListener("click", revela);
-
-function revela(){
-    if (aberto){return;}
-    let too1Face = document.querySelector("[name=too1-face]");
-    let too1Link = document.querySelector("[name=too1-link]");
-    let too1Btn = document.querySelector("#too1");
-    let insert = "";
-    tool1Div.setAttribute("style", "display: block");
-    aberto = true;
-    too1Btn.addEventListener("click", function muda(){
-        insert = `<a href="${too1Link.value}">${too1Face.value}</a>`;
-        texto.value += insert;
-        insert = "";
-        setTimeout(esconde, 10);        
-    })
-}
-function esconde(){
-    tool1Div.setAttribute("style", "display: none");
-    aberto = false;
-}
-
-
-
-
 
 

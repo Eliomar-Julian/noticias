@@ -11,15 +11,15 @@ function roll(r){
     let logo = document.querySelector("#logo");
     if(min > 0){
         menu.setAttribute("style", "transition: 2s; width: 100%; top: 0; position: fixed;");
-        if(window.innerWidth > 700){
-            menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-light");
+        if(window.innerWidth > 900){
+            menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-danger");
             
         }
         logoMenu.setAttribute("style", "opacity: 100%;");
         logo.setAttribute("style", "opacity: 0%; transiton: 1s;");
         items.forEach(function changeColor(change){
-            change.setAttribute("class", "navbar-brand text-dark");
-            change.setAttribute("style", "padding: 0px;");
+            change.setAttribute("class", "navbar-brand");
+            change.setAttribute("style", "padding: 0px; color: #ffffff;");
             
         })
     } 
@@ -31,7 +31,7 @@ function roll(r){
         logo.setAttribute("style", "opacity: 100%; transition: 1s;");
         items.forEach(function reChangedColor(change){
             change.setAttribute("class", "navbar-brand text-light")
-            change.removeAttribute("style");
+            //change.removeAttribute("style");
         })
     }
 }

@@ -1,3 +1,1 @@
-ajeitar o first post em smartphones
-carroulsel
-painel de ferramentas
+criar painel de atalhos para o post
