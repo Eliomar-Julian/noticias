@@ -74,7 +74,7 @@
     border: none;
     float: left;
     margin-left: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 10%;
 }
 #first-post [data-article=article]{
     font-size: 12pt;
@@ -106,7 +106,7 @@
     height: 50vh;
     max-height: 50vh;
     padding: 5px;
-    margin-top: 5%;
+    margin-top: 10%;
     border-collapse: collapse;
     border-bottom: 1px solid rgba(128, 128, 128, 0.496);
     text-align: left;
@@ -292,8 +292,8 @@ label{
         width: 60%;
         height: 100%;
         margin: auto;
-        margin-top: 5%;
-        margin-bottom: 20%;
+        margin-top: 1%;
+        margin-bottom: 10%;
     }
     [data-s]{
         width: 100%;
