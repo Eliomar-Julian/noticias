@@ -82,14 +82,14 @@
 <div data-ads="google ads" class="container"></div>
 <footer>
   <div id="footer" class="container-fluid bg-danger">
-    <div class="container-fluid mx-auto bg-danger rounded" id="logo-rodape">
-      <a href="/" class="icone"><img src="{{ url_for('static', filename='img/FNLogo.png') }}" alt="logo" id="logo-main"
+    <div class="container-fluid" id="logo-rodape">
+      <a id="logo-main" href="/" class="icone"><img class="img-fluid mx-auto"src="{{ url_for('static', filename='img/FNLogo.png') }}" alt="logo" 
         title="Fatimense Notícias" >
       </a>
     </div>
     
-    <div class="container-fluid mx-auto">
-      <h3 class="h6 text-light">Fatimense News | 2021</h3> <p class="text-dark"></p>&copy;Todos os direitos reservados</p>
+    <div class="container-fluid mx-auto" id="creditos">
+      <h3 class="h6 text-light">Sisal News | 2021</h3> <p class="text-dark"></p>&copy;Todos os direitos reservados</p>
     </div>
     <div class="container-fluid mx-auto"></div>
   </div>

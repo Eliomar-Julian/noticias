@@ -21,7 +21,7 @@ cols.forEach((elem, index)=>{
 let pst = document.querySelector("#posting");
 let tool1 = document.querySelector("[data-tool1]");
 let tool1Div = document.querySelector("[data-tool1=div]");
-let texto = document.querySelector("[name=text]");
+var texto = document.querySelector("[name=text]");
 let emptyText = new String();
 let aberto = false;
 pst.addEventListener("click", (e) => {
@@ -31,6 +31,43 @@ pst.addEventListener("click", (e) => {
     pst.setAttribute("type", "submit");
 })
 
+// ------------------ botoes de atalhos ------------------------------
+function insert(bt){
+    var tmpString;
+    switch (bt.title) {
+        case "Negrito":
+            tmpString = `<strong></strong>`;
+            break;
+        case "Itálico":
+            tmpString = `<i></i>`;
+            break;
+        case "Link":
+            tmpString = `<a href="#" class="text-primary">Link</>`;
+            break;
+        case "Imagem":
+            tmpString = `<img src="" data-page alt="imagem" />`;
+            break;
+        case "Enfase":
+            tmpString = `<br><h3 class="h3 text-dark">Enfase</h3><br>`;
+            break;
+
+        case "Lista":
+            tmpString = `<ul><li>item</li><li>item</li><li>item</li></ul>`;
+            break;
+        case "Underline":
+            tmpString = `<u class="text-danger">Sublinhado</u>`;
+            break;
+
+        case "Ads topo":
+            tmpString = `<div data-page="ads-top"><img src="" class="img"></div>`;
+            break;
+    
+        default:
+            break;
+    }
+    texto.value += tmpString;
+    texto.focus()
+}
 
 
 

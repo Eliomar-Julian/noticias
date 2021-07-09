@@ -436,29 +436,30 @@ label{
 
 #footer{
     height: 40vh;
-    display: flex;
+    display: inline-block;
     align-items: center;
     margin-bottom: -15%;
     margin-top: 10%;
 }
 #logo-rodape{
-    width: auto;
-    height: auto;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    margin: auto;
+    width: 80%;
+    height: 20vh;
+    background-color: rgba(102, 51, 153, 0);
 }
 #logo-main{
-    width: 30vw;
-    filter: brightness(0);
+    width: 20vw;
+    margin-left: 40%;
+    background-color: rgba(255, 0, 0, 0);
 }
-.icone{
-    margin: 0%;
-}
+
 .letras {
     width: max-content;
     margin-bottom: 0px;
+}
+#creditos{
+    margin: auto;
+    background-color: rgba(102, 51, 153, 0);
+    text-align: center;
 }
 
 /*--------------Botoes de compartilhamento ------------------*/
