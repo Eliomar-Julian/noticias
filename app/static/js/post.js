@@ -21,11 +21,14 @@ cols.forEach((elem, index)=>{
 let pst = document.querySelector("#posting");
 let tool1 = document.querySelector("[data-tool1]");
 let tool1Div = document.querySelector("[data-tool1=div]");
+var title = document.querySelector("[name=title]");
 var texto = document.querySelector("[name=text]");
 let emptyText = new String();
 let aberto = false;
 pst.addEventListener("click", (e) => {
-    emptyText = texto.value.replace(/\n/g, "<br>")
+    emptyText = texto.value.replace(/\n/g, "<br>");
+    emptyText.replace(/\%/g, "&percnt;");
+    title.value.replace(/\%/g, "&percnt;");
     texto.value = emptyText.replace(/\'/g, "&lsquo;");
     
     pst.setAttribute("type", "submit");

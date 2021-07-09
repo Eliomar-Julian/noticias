@@ -14,7 +14,7 @@
     <div class="posts">
         <article>
             <div data-space class="container container-fluid"></div>
-            <h1 class="h1 text-dark text-left">{{ var.title }}</h1>
+            <h1 class="h1 text-dark text-left">{{ var.title|safe }}</h1>
             <p class="h4 text-secondary">{{ var.sub }}</p>
             <div style="font-size: small; display: inline-flexbox; margin-bottom: 5%;">
                 <p style="padding: 0px; margin: 0px;" class="text-info">Data: <span class="text-secondary">{{ var.date }}</span></p>
