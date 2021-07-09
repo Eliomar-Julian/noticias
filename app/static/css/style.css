@@ -29,7 +29,9 @@
     padding: 3%;
     border-radius: 5px;
 }
-
+[data-separator=container]{
+    margin-top: 5%;
+}
 #logo{
     width: max-content;
     background-color:transparent;
@@ -258,14 +260,24 @@ label{
 /* adaptando a tela --responsividade -- */
 @media(max-width: 900px){
     [data-sub=div]{
-        margin: auto;
-        margin-top: 10%;
+        margin: 1vw;
+        margin-top: 2%;
     }
     [data-article=article]{
         display: none;
     }
+	[data-f]{
+		height: 100%;
+	}
+	[data-h1]{
+		font-size: 13pt;
+	}
+	[data-data]{
+		margin-top: 1vh;
+	}
+		
 }
-@media (max-width: 600px){
+@media (max-width: 500px){
     #logo-menu{
         display: block;
     }
@@ -450,12 +462,12 @@ label{
     margin-top: 10%;
 }
 #logo-rodape{
-    width: 80%;
-    height: 20vh;
+    width: 40%;
+    height: 10vh;
     background-color: rgba(102, 51, 153, 0);
 }
 #logo-main{
-    width: 20vw;
+    width: 10vw;
     margin-left: 40%;
     background-color: rgba(255, 0, 0, 0);
 }
