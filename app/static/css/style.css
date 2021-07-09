@@ -1,6 +1,9 @@
 @charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 
 /*---------------- menu ------------- */
+/*cores --frente: #ff6600 */
+
 #hamburguer{
     position:absolute;
     left: 10%;
@@ -21,6 +24,7 @@
     text-shadow: 1px 1px 5px white;
 }
 [data-menu]{
+    font-family: 'Staatliches', cursive;
     transition: 0.4s;
     padding: 3%;
     border-radius: 5px;
@@ -65,7 +69,7 @@
 [data-sub] h1{
     border-collapse: collapse;
 }
-#first-post{
+[data-id=first-post]{
     min-width: 45vw;
     min-height: 45vh;
     max-width: 45vw;
@@ -73,10 +77,11 @@
     background-color: transparent;
     border: none;
     float: left;
-    margin-left: 2%;
-    margin-bottom: 10%;
+    margin-left: 4%;
+    margin-bottom: 2%;
+    padding: 2%;
 }
-#first-post [data-article=article]{
+[data-id=first-post] [data-article=article]{
     font-size: 12pt;
     text-align: justify;
 }
@@ -85,7 +90,7 @@
     max-height: 100%;
 }
 [data-h1]{
-    background-color: transparent;
+    opacity: 80%;
     border-radius: 0px 10px 10px 0px;
     padding: 2%;
     position: absolute;
@@ -106,7 +111,7 @@
     height: 50vh;
     max-height: 50vh;
     padding: 5px;
-    margin-top: 10%;
+    margin-top: 1%;
     border-collapse: collapse;
     border-bottom: 1px solid rgba(128, 128, 128, 0.496);
     text-align: left;
@@ -116,19 +121,22 @@
     
 }
 [data-h1]:hover{
-    background-color: #0a0a0ac0;
+    opacity: 100%;
     transition: 0.5s;
     z-index: 1;
 }
 [data-h1]:hover + [data-f]{
-    filter: blur(1px);
+    filter: blur(2px);
     transition: 0.3s;
     z-index: -1;
 }
 [data-sub=div]:hover {
     box-shadow: 1px 1px 5px rgba(7, 7, 7, 0.356);
 }
-
+[data-data]{
+    color: #ff6600;
+    font-family: 'Staatliches', cursive;
+}
 /* ------------- tela de login ----------- */
 
 input[class=form-control]{
@@ -299,13 +307,13 @@ label{
         width: 100%;
         height: auto;
     }
-    #first-post{
+    [data-id=first-post]{
         display: none;
     }
-    #first-post [data-f]{
+    [data-id=first-post] [data-f]{
         margin-bottom: 0px;
     }
-    #first-post #data{
+    [data-id=first-post] #data{
         display: none;
     }
     a{
