@@ -28,7 +28,7 @@ let aberto = false;
 pst.addEventListener("click", (e) => {
     emptyText = texto.value.replace(/\n/g, "<br>");
     emptyText.replace(/\%/g, "&percnt;");
-    title.value.replace(/\%/g, "&percnt;");
+    title.value = title.value.replace(/\%/g, "&percnt;");
     texto.value = emptyText.replace(/\'/g, "&lsquo;");
     
     pst.setAttribute("type", "submit");
