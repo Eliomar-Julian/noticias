@@ -358,7 +358,7 @@ label{
         display: none;
     }
     [data-page=ads-top]{
-        margin-top: 1%;
+        margin-top: 16%;
         max-height: 100px;
         height: 50px;
         background-color: transparent;
@@ -431,7 +431,7 @@ label{
     height: 150px;
     max-height: 200px;
     position: absolute;
-    top: 16%;
+    top: 18vw;
     left: 20%;
     z-index: -1;
     display: flex;
