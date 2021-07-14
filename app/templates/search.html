@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block body %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Pesquisa..</title>
+    <h1 class="h1 text-danger text-center"> Resultado(s)</h1>
+    <div id="container-fluid mx-auto">            
+        {% for tuples in var %}
+	
+                {#<!------------  Demais posts para com thumbnail de link externo ---------------------#}
+                <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
+                    {% if tuples[6][:4] == 'http' %}
+                        <div data-sub="div" class="btn btn-outline-light">
+                            <img data-s class="rounded float-left" src="{{ tuples.6 }}" alt="">
+                            <h1 class="h6 text-secondary text-left" data-h2>{{ tuples.4|safe }}</h1>
+                            <p data-data class="h6 text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
+                            <p data-article="article" class="text-dark-lg text-center">{{ tuples.9[:75] }}</p>
+                        </div>
+                    {% else %}
+                    {#<!------------- Demais posts para thumbnail interno--------------------------------->#}
+                    <div data-sub="div" class="btn btn-outline-light">
+                        <img data-s class="rounded float-left" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
+                        <h1 class="h6 text-secondary text-left" data-h2>{{ tuples[4]|safe }}</h1>
+                        <p data-data class="h6 text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
+                        <p data-article="article" class="text-dark-lg text-center">{{ tuples.9[:75] }}...</p>
+                    </div>
+                    {% endif %}
+                </a>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

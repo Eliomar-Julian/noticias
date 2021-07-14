@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <img class="mx-auto" src="{{ url_for('static', filename='img/barreira.jpg') }}" alt="">
+        <h1 class="h1 text-warning"> Quase lá, fique ligado</h1>
+    </div>
+    <style>
+        .mx-auto{
+            text-align: center;
+            margin: 5%;
+            width: 30vw;
+        }
+    </style>
+{% endblock %}

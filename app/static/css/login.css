@@ -1,0 +1,19 @@
+/* ------------- tela de login ----------- */
+
+input[class=form-control]{
+    margin-top: 1%;
+}
+.form-login {
+    width: 40vw;
+    margin: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.btn.btn-success.btn-lg {
+    margin-top: 1%;
+}
+.rounded.mx-auto.d-block{
+    margin-top: 2%;
+}
+[data-message]{
+    visibility: hidden;
+}

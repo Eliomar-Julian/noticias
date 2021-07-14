@@ -2,19 +2,13 @@
 {% block body %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Ultimas noticias</title>
-    <div class="container-lg bg-secondary" style="margin-top: 1%;">{{ var.ads|safe }}</div>
     <div id="container-fluid mx-auto">
-	<div class="container-fluid" data-separator="container" style="display: flex; align-items: center;">
-		<span class="h2" data-separator="text" style="margin-top: 5%;width: 50vw; font-family: 'Staatliches', cursive; color: #ff6600; letter-spacing: -1px; font-style: italic;">Recentes</span>
-		<div class="container-fluid" style="height: 2px; background-color: #ff6600;"></div>
-
-	</div>
-        {% for tuples in var %}
-            <!-------------------------------- primeiros posts --------------------------------->
+	    {% for tuples in var %}
+            {#!-------------------------------- primeiros posts ---------------------------------#}
                 {% if loop.index <= 4 %}
                 <div class="container-fluid mx-auto">
                     <a  href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
-			    <div data-id="first-post" data-sub="div" class="container-lg bg-dark">
+			            <div data-id="first-post" data-sub="div" class="container-fluid bg-dark">
                             <p data-h1 class="h3 text-light bg-dark">{{ tuples.4|safe }}</p>
                             {% if tuples[6][:4]  == 'http' %}
                                 <img data-f class="rounded" src="{{ tuples.6 }}" alt="{{ tuples[6] }}">
@@ -25,17 +19,17 @@
                         </div>
                     </a>
                 </div>
-                <!------------ Primeiros posts ocultos para mostrar somente celular -------------------->
+                {#!------------ Primeiros posts ocultos para mostrar somente celular --------------------#}
                 <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}" data-ocult="true">
                     {% if tuples[6][:4] == 'http' %}
                         <div data-sub="div" class="btn btn-outline-light">
                             <img data-s class="rounded float-left"  src="{{ tuples.6 }}" alt="">
                             <p class="h6 text-secondary text-left" data-h2>{{ tuples.4|safe }}</p>
-                            <p data-data class="h6 text-info text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
+                            <p data-data class="h6 text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
                             <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}</p>
                         </div>
                     {% else %}
-                    <!------------- Demais posts para thumbnail interno--------------------------------->
+                    {#!------------- Demais posts para thumbnail interno--------------------------------->#}
                     <div data-sub="div" class="btn btn-light">
                         <img data-s class="rounded float-left" 
                             src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
@@ -47,16 +41,15 @@
                 </a>
                 {% endif %}
             {% endfor %}
-	    	<div class="container-fluid" data-separator="container" style="display: flex; align-items: center;">
-			<span class="h2" data-separator="text" style="margin-top: 5%;width: 50vw; font-family: 'Staatliches', cursive; color: #ff6600; letter-spacing: -1px; font-style: italic;">Continue &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lendo</span>
-			<div class="container-fluid" style="height: 2px; background-color: #ff6600;"></div>
-
-		</div>
+	    	<div class="container-fluid" data-separator="container">
+			<p class="h2" data-separator="text">Continue lendo</p>
+			<div data-separator="line" class="container-fluid"></div>
+    </div>
 
             
         {% for tuples in var %}
 		{% if loop.index > 4 %}
-                <!------------  Demais posts para com thumbnail de link externo --------------------->
+                {#<!------------  Demais posts para com thumbnail de link externo ---------------------#}
                 <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
                     {% if tuples[6][:4] == 'http' %}
                         <div data-sub="div" class="btn btn-outline-light">
@@ -66,7 +59,7 @@
                             <p data-article="article" class="text-dark-lg text-center">{{ tuples.9[:75] }}</p>
                         </div>
                     {% else %}
-                    <!------------- Demais posts para thumbnail interno--------------------------------->
+                    {#<!------------- Demais posts para thumbnail interno--------------------------------->#}
                     <div data-sub="div" class="btn btn-outline-light">
                         <img data-s class="rounded float-left" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
                         <h1 class="h6 text-secondary text-left" data-h2>{{ tuples[4]|safe }}</h1>

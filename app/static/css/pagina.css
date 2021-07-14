@@ -1,0 +1,30 @@
+/* -------paginas individuais -------------------- */
+.posts{
+    width: 40%;
+    margin: auto;
+    margin-top: 15%;
+    margin-bottom: 5%;
+    text-align: left;
+    display: block;
+    align-items: center;
+}
+
+#photos-page{
+    margin: auto;
+}
+[data-s]{
+    width: 100%;
+    height: 10vw;
+    margin: auto;
+    padding: 2%;
+}
+[data-f]{
+    width: 100%;
+    height: 45vh;
+    margin: auto;
+
+}
+[data-page]{
+    width: 40vw;
+    height: auto;
+}

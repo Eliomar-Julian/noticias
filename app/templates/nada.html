@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="cont"><img class="erro" src="{{ url_for('static', filename='img/error.png') }}"  alt="error"></div>
+<div class="container"><h1 class="h1 text-warning">Parece que temos algo quebrado por aqui!</h1>
+    <p class="text-info"> Verifique o link e tente novamente...</p>
+</div>
+
+
+<style>
+    .cont{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-top: 5%;
+    }
+    .erro{
+        width: 40%;
+        height: auto;
+        margin: auto;
+    }
+</style>
+
+
+
+{% endblock %}

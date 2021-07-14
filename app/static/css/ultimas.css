@@ -1,0 +1,87 @@
+
+/* ----------ultimas -----------------------*/
+
+[data-ocult="true"]{
+    display: none;
+}
+[data-sub]{
+    border-collapse: collapse;
+}
+[data-sub] h1{
+    border-collapse: collapse;
+}
+[data-id=first-post]{
+    min-width: 45vw;
+    min-height: 60vh;
+    max-width: 45vw;
+    max-height: 60vh;
+    border: none;
+    float: left;
+    margin-left: 2%;
+    margin-bottom: 5%;
+    padding: 2%;
+}
+[data-id=first-post] [data-article=article]{
+    font-size: 12pt;
+    text-align: justify;
+}
+[data-article="article"]{
+    font-size: 10pt;
+    max-height: 100%;
+}
+[data-h1]{
+    opacity: 80%;
+    border-radius: 0px 10px 10px 0px;
+    padding: 2%;
+    position: absolute;
+    margin-top: 5%; 
+    width: 38%;
+    margin-bottom: 10%;
+}
+#content{
+    width: 98%;
+    background-color: transparent;
+    margin: auto;
+    margin-top: 7%;
+}
+[data-sub=div]{
+    width: 20%;
+    color: black;
+    height: 50vh;
+    max-height: 50vh;
+    padding: 5px;
+    margin-top: 1%;
+    border-collapse: collapse;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.496);
+    text-align: left;
+    margin-left: 1%;
+    display: inline-block;
+    transition: 0.3s;
+    
+}
+[data-h1]:hover{
+    opacity: 100%;
+    transition: 0.5s;
+    z-index: 1;
+}
+[data-h1]:hover + [data-f]{
+    filter: blur(2px);
+    transition: 0.3s;
+    z-index: -1;
+}
+[data-sub=div]:hover {
+    box-shadow: 1px 1px 5px rgba(7, 7, 7, 0.356);
+}
+[data-data]{
+    background-color: #ff6600;
+    color: #fff;
+    font-family: 'Staatliches', cursive;
+    width: max-content;
+    font-size: 12pt;
+    margin: auto;
+    padding: 5px;
+    border-radius: 3px;
+}
+[data-f]{
+    height: 100%;
+}
