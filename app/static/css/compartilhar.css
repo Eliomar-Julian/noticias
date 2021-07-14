@@ -1,0 +1,11 @@
+/*--------------Botoes de compartilhamento ------------------*/
+#share-div{
+    display: flex;
+    align-items: center;
+    padding: 1%;
+}
+.twitter-share-button{
+    margin: auto;
+    width: max-content;
+}
+

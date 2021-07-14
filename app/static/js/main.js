@@ -12,7 +12,7 @@ function roll(r){
     if(min > 0){
         menu.setAttribute("style", "transition: 2s; width: 100%; top: 0; position: fixed;");
         if(window.innerWidth > 900){
-            menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-danger");
+            menu.setAttribute("class", "navbar navbar-expand-lg navbar-light");
             
         }
         logoMenu.setAttribute("style", "opacity: 100%;");
@@ -27,7 +27,7 @@ function roll(r){
         menu.removeAttribute("style", "top");
         logoMenu.setAttribute("style", "opacity: 0%;");
         menu.setAttribute("style", "position: relative;");
-        menu.setAttribute("class", "navbar navbar-expand-lg navbar-light bg-danger");
+        menu.setAttribute("class", "navbar navbar-expand-lg navbar-light");
         logo.setAttribute("style", "opacity: 100%; transition: 1s;");
         items.forEach(function reChangedColor(change){
             change.setAttribute("class", "navbar-brand text-light")
@@ -58,8 +58,10 @@ hamburguer.addEventListener("click", revelar);
 hamburguer.style.backgroundColor = "white";
 function revelar(){
   if (show == false){
+    
+    expandir.setAttribute("style", "transition: all 2s ease; height: 100%;")
     expandir.classList.add("d-block");
-    expandir.setAttribute("style", "transition: all 2s;")
+    
     show = true;
   }
   else{

@@ -21,6 +21,12 @@ def admin():
 def logon(session):
     return login_on(session)
 
+
 @app.route("/<category>/<title>", methods=["GET", "POST"])
 def open_page(category, title):
     return query_news(category, title)
+
+
+@app.route("/contato")
+def contact():
+    return render_template("contato.html")

@@ -1,0 +1,22 @@
+/*------------------separadores --------------------------------*/
+
+[data-separator=container]{
+    display: flex; 
+    align-items: center;
+}
+[data-separator=text]{
+    color: white;
+    margin-top: 5vh;
+    background-color: #ff6600;
+    font-family: 'Staatliches', cursive; 
+    border-radius: 0 5px 5px 0;
+    text-align: center;
+    letter-spacing: -1px; 
+    font-style: italic;
+    width: 70vw;
+}
+[data-separator=line]{
+    height: 2px; 
+    width: 100%;
+    background-color: #ff6600;
+}

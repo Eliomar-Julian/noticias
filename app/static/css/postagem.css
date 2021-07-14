@@ -1,0 +1,65 @@
+/* ---------formulario de postagem ---------------- */
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+[data-header=content]{
+    width: 100vw;
+    margin: auto;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+[data-header=cols]{
+    margin: auto;
+    width: 100%;
+    border-radius: 0px;
+    border: 1px solid black;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+[data-header=window]{
+    width: 80vw;
+    height: 60vh;
+    border-top: none;
+    margin: auto;
+    display: block;
+    align-items: center;
+    border-collapse: collapse;
+}
+[data-editor]{
+    margin-top: 1%;
+    max-width: 80vw;
+    min-width: 80vw;
+    max-height: 20vh;                                                                                                                           
+}
+.form-group{
+    width: 80%;
+    margin: auto;
+    background-color:transparent;
+    text-align: center;
+    border-radius: 5px;
+    padding: 2%;
+}
+input[type=date]{
+    margin-right: 1%;
+}
+label{
+    margin-top: 1%;
+}
+#post{
+    width: 100%;
+}
+.mostra{
+    display: block;
+}
+.esconde {
+    display: none;
+}
+[data-editor]{
+    margin-top: 1%;
+    max-width: 80vw;
+    min-width: 80vw;
+    max-height: 20vh;
+}
