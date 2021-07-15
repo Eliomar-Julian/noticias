@@ -9,6 +9,7 @@ import os
 
 
 # // instancia de acesso ao banco
+
 DATABASE = SQL()
 
 
@@ -27,7 +28,7 @@ def home_():
         cur = DATABASE.query_like(search)
         return render_template("search.html", var=sorted(cur.fetchall(), reverse=True))
     cur = DATABASE.personal()
-    cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 50;")
+    cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 24;")
     return render_template("ultimas.html", var=cur.fetchall())
 
 

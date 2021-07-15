@@ -46,7 +46,7 @@ class SQL:
         all: bool=False, 
         order: str = str()):
         select = self.cursor.execute(
-            f"SELECT * FROM {table} WHERE {col_name} = ? LIMIT 50;", 
+            f"SELECT * FROM {table} WHERE {col_name} = ? LIMIT 30;", 
             [value,]
         )
         if all: return select.fetchall()

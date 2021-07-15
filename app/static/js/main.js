@@ -102,3 +102,27 @@ $("#btn-login").click(function(event) {
         }
     })
 })
+
+
+//----------------------buscas //------------------------------------//
+
+var btSearch = document.querySelector("#button-search");
+var input = document.querySelector("[type=search]");
+btSearch.addEventListener("mouseenter", busca);
+function busca(){
+    input.setAttribute("style", "visibility: visible;");
+}
+
+// ------------------ ver mais --------------------------------------------//
+
+var mais = document.querySelectorAll("[data-more=show-more]");
+var btMais = document.querySelector("#show-more");
+var textMais = document.querySelector("[data-mais=mais]");
+btMais.addEventListener("click", aparece);
+function aparece(){
+    for(var i = 0; i < mais.length; i++){
+        mais[i].setAttribute("style", "display: inline-block;");
+    }
+    //btMais.setAttribute("style", "display: none;");
+    textMais.setAttribute("style", "display: block;");
+}

@@ -20,6 +20,7 @@
     margin-left: 2%;
     margin-bottom: 5%;
     padding: 2%;
+    border-radius: 5px;
 }
 [data-id=first-post] [data-article=article]{
     font-size: 12pt;
@@ -85,3 +86,16 @@
 [data-f]{
     height: 100%;
 }
+#show-more{
+    border: none;
+    background-color: #ff6600;
+    color: #fff;
+    font-family: 'Staatliches', cursive;
+    margin: auto;
+    border-radius: 5px;
+    width: 30%;
+    padding: 5px;
+    margin-top: 1%;
+    font-size: 14pt;
+}
+

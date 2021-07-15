@@ -9,6 +9,7 @@
     padding: 1%;
     transition: 1s;
     height: auto;
+    z-index: 1;
 }
 
 #form-search{
@@ -23,11 +24,8 @@
     border: none;
     transition: 1s;
     width: 100%;
-    max-height: 20pt;
-    display: none;
-}
-#form-search:hover [name=search]{
-    display: block;
+    max-height: 25pt;
+    visibility: hidden;
 }
 
 #button-search{
