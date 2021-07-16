@@ -6,6 +6,7 @@ import threading
 from time import sleep
 from werkzeug.utils import secure_filename
 import os
+from datetime import datetime
 
 
 # // instancia de acesso ao banco
@@ -84,12 +85,15 @@ def login():
             return jsonify(message="errorName")
         elif pass_ != password:
             return jsonify(message="errorPassword")
-        elif user[1] == name and pass_ == password:
+        elif user[1] == name and pass_ == password: # comparando user e senha...
             DATABASE.insert_in_table("sessions", 
                 ["sessions_name", 
                     "sessions_hash", 
-                    "sessions_permanent"], 
-                [name, user_session_finnaly, expires]
+                    "sessions_permanent"], [
+                                            name, 
+                                            user_session_finnaly, 
+                                            expires
+                                        ]
             )
             
             if expires == "true":             # verifica se a sessão expirará...
@@ -208,7 +212,7 @@ def login_on(session):
             )
             resp.set_cookie("FNAdmin", yes[0])
             return resp
-    except Exception as e:
+    except Exception:
         return '<h3 style="color: red;">Sessão expirada ou token invalido...</h3>'
 
 

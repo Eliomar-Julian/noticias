@@ -5,30 +5,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/theme/dracula.css') }}">
     <div class="main">
         <div data-header="content">
-            <div class="btn btn-outline-info" data-header="cols">Usuários</div>
-            <div class="btn btn-danger" data-header="cols">Postagens</div>
+            <div class="btn btn-outline-info" data-header="cols">Informações da sessão</div>
+            <div class="btn btn-danger" data-header="cols">Fazer postagens</div>
             <div class="btn btn-danger" data-header="cols">Gerenciar postagens</div>
         </div>
         <div data-header="window">
             <div  data-item="user" style="display: block;">
-                <h1 class="h5 text-danger text-center">Usuários</h1>
+                <h1 class="h5 text-danger text-center">Informações da sessão</h1>
                 <form action="" method="POST">
                     <div class="form-group">
                         <p class="text-info"><span class="text-danger">Logado como:</span> {{ var.session_name }}</p>
                         <p class="text-info"><span class="text-danger"> Token: </span> {{ var.session_hash }}</p>
-                        <p class="text-info"><span class="text-danger">Expirar sessão:</span> 
+                        <p class="text-info"><span class="text-danger">Expirar sessão em 10 minutos:</span> 
                             {{ var.session_expire|replace('false', 'Não')|replace('true', 'Sim') }}
                         </p>
-                        <p class="text-info"><span class="text-danger">Dispositivos logados:</span> {{ var.session_actives }}</p>
+                        <p class="text-info"><span class="text-danger">Registros de sessões:</span> {{ var.session_actives }}</p>
                         <button class="btn btn-primary" name="logoff" value="exit" type="submit">Deslogar esse administrador</button>
                         <button class="btn btn-secondary" name="logoff" value="exit-all" type="submit">
-                            Deslogar todos os administradores
+                            Limpar Registros de sessões.
                         </button>
+                        <h5 class="h5 text-danger">DICA: <span class="text-info">sempre limpe os registros para se deslogar de todos os dispositivos.</span></h5>
                     </div>
                 </form>
             </div>
             <div  data-item="post" style="display: none;">
-                <p class="h2 text-center text-info text-danger"> Postagem</p>
+                <p class="h2 text-center text-info text-danger"> Fazer postagens</p>
                 <form method="POST" id="post" enctype="multipart/form-data">
                     <input type="hidden" name="id">
                     <input type="date" name="date" required>
@@ -104,7 +105,7 @@
                 </div>
             </div>
             <div  data-item="manager" style="display: none;">
-                <h1 class="h2 text-danger text-center">Gerenciar postagens</h1>
+                <h1 class="h2 text-danger text-center">Gerenciar postagens. <span class="text-info">clique em uma postagem para edita-la.</span></h1>
                 <div class="content-posts">
                     <ol>
                         {% for info in var.session_data %}
