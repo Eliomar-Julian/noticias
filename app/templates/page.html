@@ -8,10 +8,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ var.title }}" />
     <meta property="og:description"   content="{{ var.sub }}" />
-    <meta property="og:image"         content="{{ url_for('static', filename='img/upload/' + var.photos) }}" />
-    {% if var.photos[:4] == 'http'%}
-        <meta property="og:image"         content="{{ var.photos }}" />
-    {% endif %}
+    <meta property="og:image"         content="{{ var.photos }}" />
     
 {#-------------------- Corpo da postagem ----------------------------------------#}
     <div class="posts">
@@ -56,10 +53,10 @@
             </div>
             <div id="photos-page">
                 {% if var.photos[:4] == 'http' %}
-                    <img data-page src="{{ var.photos }}" alt="{{ var.photos }}">
+                    <img data-page src="{{ var.photos }}" alt="thumbnail" class="img-thumbnail">
                     
                 {% else %}
-                    <img data-page src="{{ url_for('static', filename='img/upload/' + var.photos) }}" alt="{{ var.photos }}">
+                    <img data-page src="{{ url_for('static', filename='img/upload/' + var.photos) }}" alt="thumbnail" class="img-thumbnail">
                     
                 {% endif %}
             </div>

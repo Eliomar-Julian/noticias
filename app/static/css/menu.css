@@ -23,7 +23,7 @@
     outline: none;
     border: none;
     transition: 1s;
-    width: 100%;
+    width: 0%;
     max-height: 25pt;
     visibility: hidden;
 }

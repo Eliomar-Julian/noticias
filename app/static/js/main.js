@@ -11,10 +11,10 @@ function roll(r){
     let logo = document.querySelector("#logo");
     if(min > 0){
         menu.setAttribute("style", "transition: 2s; width: 100%; top: 0; position: fixed;");
-        if(window.innerWidth > 900){
-            menu.setAttribute("class", "navbar navbar-expand-lg navbar-light");
+        //if(window.innerWidth > 900){
+          //  menu.setAttribute("class", "navbar navbar-expand-lg navbar-light");
             
-        }
+        //}
         logoMenu.setAttribute("style", "opacity: 100%;");
         logo.setAttribute("style", "opacity: 0%; transiton: 1s;");
         items.forEach(function changeColor(change){
@@ -107,22 +107,47 @@ $("#btn-login").click(function(event) {
 //----------------------buscas //------------------------------------//
 
 var btSearch = document.querySelector("#button-search");
+var svgs = document.querySelectorAll("svg");
 var input = document.querySelector("[type=search]");
-btSearch.addEventListener("mouseenter", busca);
+var expand = false;
+svgs[1].style.filter = "invert(100%)";
+svgs[1].style.display = "none";
+btSearch.addEventListener("click", busca);
 function busca(){
-    input.setAttribute("style", "visibility: visible;");
+    if(expand === false){
+        input.setAttribute("style", "visibility: visible; width: 100%;");
+        svgs[0].style.display ="none";
+        svgs[1].style.display = "block";
+        expand = true;
+    }else if (expand === true){
+        input.setAttribute("style", "visibility: hidden;");
+        svgs[0].style.display ="block";
+        svgs[1].style.display = "none";
+        expand = false;
+    }
 }
 
 // ------------------ ver mais --------------------------------------------//
 
 var mais = document.querySelectorAll("[data-more=show-more]");
 var btMais = document.querySelector("#show-more");
-var textMais = document.querySelector("[data-mais=mais]");
+var expandMore = false;
+svgs[3].style.display = "none";
 btMais.addEventListener("click", aparece);
 function aparece(){
-    for(var i = 0; i < mais.length; i++){
-        mais[i].setAttribute("style", "display: inline-block;");
+    if(expandMore === false){
+        for(var i = 0; i < mais.length; i++){
+            mais[i].setAttribute("style", "display: inline-block;");
+        }
+        svgs[2].style.display = "none";
+        svgs[3].style.display = "inline-block";
+        expandMore = true;
+    }else if(expandMore === true){
+        for(var i = 0; i < mais.length; i++){
+            mais[i].setAttribute("style", "display: none;");
+        }
+        svgs[2].style.display = "inline-block";
+        svgs[3].style.display = "none";
+        expandMore = false;
     }
-    //btMais.setAttribute("style", "display: none;");
-    textMais.setAttribute("style", "display: block;");
 }
