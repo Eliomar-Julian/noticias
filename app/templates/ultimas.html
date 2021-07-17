@@ -5,7 +5,7 @@
     <div id="container-fluid text-center">
 	    {% for tuples in var %}
             {#!-------------------------------- primeiros posts ---------------------------------#}
-                {% if loop.index <= 4 %}
+                {% if loop.index < 5 %}
                 <div class="container-fluid mx-auto">
                     <a  href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
 			            <div data-id="first-post" data-sub="div" class="container-fluid bg-dark">
@@ -47,7 +47,7 @@
     </div>
     <div class="container-fluid text-center">
         {% for tuples in var %}
-		{% if loop.index > 4 and loop.index <= 12 %}
+		{% if loop.index > 4 and loop.index < 13 %}
                 {#<!------------  Demais posts para com thumbnail de link externo ---------------------#}
                 <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
                     {% if tuples[6][:4] == 'http' %}
@@ -95,7 +95,7 @@
                         </div>
                     {% else %}
                     {#<!------------- Demais posts para thumbnail interno-SHOW MORE--------------------------->#}
-                    <div data-sub="div" class="btn btn-outline-light" data-more="show-more">
+                    <div data-sub="div" class="btn btn-outline-light" data-more="show-more" style="display: none;">
                         <img data-s class="rounded float-left" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
                         <h1 class="h6 text-secondary text-left" data-h2>{{ tuples[4]|safe }}</h1>
                         <p data-data class="h6 text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
