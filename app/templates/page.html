@@ -15,7 +15,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ var.title }}" />
     <meta property="og:description"   content="{{ var.sub }}" />
-    {% if var.photos[:4] != 'http'%}
+    {% if var.photos[:4] in 'https'%}
         <meta property="og:image"         content="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" />
     {% else %}
         <meta property="og:image"         content="{{ var.photos }}">
@@ -25,8 +25,8 @@
     <div class="posts">
         <article>
             <div data-space class="container container-fluid"></div>
-            <h1 class="h1 text-dark text-left">{{ var.title|safe }}</h1>
-            <p class="h4 text-secondary">{{ var.sub }}</p>
+            <h1 class="h1 text-dark text-left" id="title">{{ var.title|safe }}</h1>
+            <h2 class="h4 text-secondary" id="sub-title">{{ var.sub }}</h2>
             <div style="font-size: small; display: inline-flexbox; margin-bottom: 5%;">
                 <p style="padding: 0px; margin: 0px;" class="text-info">Data: <span class="text-secondary">{{ var.date }}</span></p>
                 <p style="padding: 0px; margin: 0px;" class="text-info">Editor: <span class="text-secondary">{{ var.author }}</span></p>
