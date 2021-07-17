@@ -11,7 +11,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ var.title }}" />
     <meta property="og:description"   content="{{ var.sub }}" />
-    <meta property="og:image"         content="{{ var.photos }}" />
+    <meta property="og:image"         content="{{ url_for('static', filename='img/upload' + var.photos) }}" />
     
 {#-------------------- Corpo da postagem ----------------------------------------#}
     <div class="posts">
