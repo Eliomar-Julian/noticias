@@ -1,7 +1,4 @@
 {% extends 'base.html' %}
-{% block thumb %}
-    <img src="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" alt="{{ var.photos }}" class="img-fluid thumbnail mx-auto" hidden>
-{% endblock %}
 {% block body %}
 {#--------------------- renderiza as paginas clicadas ---------------------#}
     <title>{{ var.title }}</title>
@@ -11,7 +8,11 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ var.title }}" />
     <meta property="og:description"   content="{{ var.sub }}" />
-    <meta property="og:image"         content="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" />
+    {% if var.photos[:4] != 'http'%}
+        <meta property="og:image"         content="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" />
+    {% else %}
+        <meta property="og:image"         content="{{ var.photos }}">
+    {% endif %}
     
 {#-------------------- Corpo da postagem ----------------------------------------#}
     <div class="posts">
