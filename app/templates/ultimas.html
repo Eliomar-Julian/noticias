@@ -2,7 +2,7 @@
 {% block body %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Ultimas noticias</title>
-    <div id="container-fluid mx-auto text-auto">
+    <div id="container-fluid text-center">
 	    {% for tuples in var %}
             {#!-------------------------------- primeiros posts ---------------------------------#}
                 {% if loop.index <= 4 %}
@@ -30,13 +30,13 @@
                         </div>
                     {% else %}
                     {#!------------- Demais posts para thumbnail interno--------------------------------->#}
-                    <div data-sub="div" class="btn btn-light">
-                        <img data-s class="rounded float-left" 
-                            src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
-                        <p class="h6 text-secondary text-left" data-h2>{{ tuples[4]|safe }}</p>
-                        <p data-data class="h6 text-info text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
-                        <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}...</p>
-                    </div>
+                        <div data-sub="div" class="btn btn-light">
+                            <img data-s class="rounded float-left" 
+                                src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
+                            <p class="h6 text-secondary text-left" data-h2>{{ tuples[4]|safe }}</p>
+                            <p data-data class="h6 text-info text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
+                            <p data-article="article" class="text-success text-center">{{ tuples.9[:75] }}...</p>
+                        </div>
                     {% endif %}
                 </a>
                 {% endif %}
@@ -45,6 +45,7 @@
 			<p class="h2" data-separator="text">Continue lendo</p>
 			<div data-separator="line" class="container-fluid"></div>
     </div>
+    <div class="container-fluid text-center">
         {% for tuples in var %}
 		{% if loop.index > 4 and loop.index <= 12 %}
                 {#<!------------  Demais posts para com thumbnail de link externo ---------------------#}
@@ -104,6 +105,10 @@
                 </a>
             {% endif %}
         {% endfor %}
+    </div>
+    <div id="ads-initial" class="container-fluid">
+        <img src="{{ url_for('static', filename='img/anuncie.jpg') }}" alt="" class="img-fluid">
+        <img src="{{ url_for('static', filename='img/anuncie2.jpg') }}" alt="" class="img-fluid">
     </div>
     
 {% endblock %}

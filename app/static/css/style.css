@@ -10,6 +10,9 @@
 @import url("ultimas.css");
 
 @media (max-width: 600px){
+    #ads-initial{
+        display: none;
+    }
     #logo-menu{
         display: block;
     }

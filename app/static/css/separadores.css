@@ -6,7 +6,8 @@
 }
 [data-separator=text]{
     color: white;
-    margin-top: 5vh;
+    font-size: 15pt;
+    margin-top: 2vh;
     background-color: #ff6600;
     font-family: 'Staatliches', cursive; 
     border-radius: 0 0px 5px 0;

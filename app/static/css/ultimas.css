@@ -11,19 +11,17 @@
     border-collapse: collapse;
 }
 [data-id=first-post]{
-    min-width: 45vw;
-    min-height: 60vh;
-    max-width: 45vw;
-    max-height: 60vh;
+    width: 35vw;
+    min-width: 35vw;
     border: none;
     float: left;
-    margin-left: 2%;
-    margin-bottom: 5%;
-    padding: 2%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    padding: 1%;
     border-radius: 5px;
 }
 [data-id=first-post] [data-article=article]{
-    font-size: 12pt;
+    font-size: 10pt;
     text-align: justify;
 }
 [data-article="article"]{
@@ -36,8 +34,9 @@
     padding: 2%;
     position: absolute;
     margin-top: 5%; 
-    width: 38%;
+    width: 30%;
     margin-bottom: 10%;
+    font-size: larger;
 }
 #content{
     width: 98%;
@@ -97,5 +96,15 @@
     padding: 5px;
     margin-top: 1%;
     font-size: 14pt;
+}
+#ads-initial{
+    position: absolute;
+    top: 26vh;
+    right: 2vw;
+    width: 22vw;
+    display: block;
+    align-items: center;
+    height: auto;
+    background-color: transparent;
 }
 

@@ -65,7 +65,7 @@ class SQL:
         self.conn.commit()
 
     def query_like(self, arg: str):
-        ret = self.cursor.execute(f"SELECT * FROM noticias WHERE titulo LIKE '%{arg}%';")
+        ret = self.cursor.execute(f"SELECT * FROM noticias WHERE titulo LIKE '%{arg}%' ORDER BY DATE(data) DESC;")
         return ret
 
 

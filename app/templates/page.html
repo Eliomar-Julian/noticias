@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block thumb %}
+    <img src="{{ var.photos }}" alt="{{ var.photos }}" class="img-fluid thumbnail mx-auto" hidden>
+{% endblock %}
 {% block body %}
 {#--------------------- renderiza as paginas clicadas ---------------------#}
     <title>{{ var.title }}</title>
@@ -47,10 +50,6 @@
                     Tweet</a>
                 </div>
             </div>
-            <div class="body-post">
-                
-                <p>{{ var.text|safe }}{{ var.code|safe }}</p>
-            </div>
             <div id="photos-page">
                 {% if var.photos[:4] == 'http' %}
                     <img data-page src="{{ var.photos }}" alt="thumbnail" class="img-thumbnail">
@@ -59,6 +58,10 @@
                     <img data-page src="{{ url_for('static', filename='img/upload/' + var.photos) }}" alt="thumbnail" class="img-thumbnail">
                     
                 {% endif %}
+            </div>
+            <div class="body-post">
+                
+                <p>{{ var.text|safe }}{{ var.code|safe }}</p>
             </div>
         </article>
     </div>

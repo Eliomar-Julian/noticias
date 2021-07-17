@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify
 from flask import request, redirect, make_response
-from .models import *
+from .models import os, SQL, typing
 import hashlib
 import threading
 from time import sleep
@@ -27,7 +27,7 @@ def home_():
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
-        return render_template("search.html", var=sorted(cur.fetchall(), reverse=True))
+        return render_template("search.html", var=cur.fetchall())
     cur = DATABASE.personal()
     cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 24;")
     return render_template("ultimas.html", var=cur.fetchall())
@@ -39,10 +39,10 @@ def open_page_category(category):
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
-        return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
+        return render_template("search.html", var=cur.fetchall())
     cur = DATABASE.personal()
-    cur.execute("SELECT * FROM noticias WHERE categoria = ?;", [category,])
-    return render_template("ultimas.html", var=sorted(cur.fetchall(), reverse=True))
+    cur.execute("SELECT * FROM noticias WHERE categoria = ? ORDER BY DATE(data) DESC;", [category,])
+    return render_template("ultimas.html", var=cur.fetchall())
 
 
 # // função em thread que expira a sessão **precisa ser trabalhada**...
@@ -221,6 +221,10 @@ def login_on(session):
 def query_news(category: str=None, title: str=None):
     data = DATABASE.get_table_data("noticias", "titulo", title)
     outer = DATABASE.get_table_data("noticias", "categoria", category, all=True)
+    search = request.args.get("search")
+    if search:
+        cur = DATABASE.query_like(search)
+        return render_template("search.html", var=cur.fetchall())
     try:
         return render_template(
             "page.html", var={
