@@ -46,7 +46,7 @@ class SQL:
         all: bool=False, 
         order: str = str()):
         select = self.cursor.execute(
-            f"SELECT * FROM {table} WHERE {col_name} = ? ORDER BY DATE(data) DESC LIMIT 9;", 
+            f"SELECT * FROM {table} WHERE {col_name} = ? ORDER BY DATE({order}) DESC LIMIT 9;", 
             [value,]
         )
         if all: return select.fetchall()

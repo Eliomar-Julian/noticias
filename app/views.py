@@ -71,13 +71,13 @@ def login():
         user_session_finnaly = generate_hash(user_session_prepare + user_cookie)
     else: 
         user_session_finnaly = generate_hash(user_session_prepare)
-    is_logon = DATABASE.get_table_data("sessions", "sessions_hash", user_session_finnaly)
+    is_logon = DATABASE.get_table_data("sessions", "sessions_hash", user_session_finnaly, order="sessions_hash")
     
     if request.method == 'POST':
         name = request.form.get("user")
         password = request.form.get("password")
         expires = request.form.get("expired")
-        user = DATABASE.get_table_data("admin", "adm", name)
+        user = DATABASE.get_table_data("admin", "adm", name, order="adm")
         try: pass_ = user[2]
         except: pass_ = None
 
@@ -110,7 +110,7 @@ def login():
 # // se logado renderiza a apagina de posts
 
 def login_on(session):
-    yes = DATABASE.get_table_data("sessions", "sessions_hash", session)
+    yes = DATABASE.get_table_data("sessions", "sessions_hash", session, order="sessions_hash")
     cur = DATABASE.personal()
     data = cur.execute("SELECT * FROM noticias ORDER BY id DESC;")
     d = data.fetchall()
@@ -198,7 +198,7 @@ def login_on(session):
                 )
             return redirect(f"/{category}/{title}")
     try:
-        active = DATABASE.get_table_data("sessions", "sessions_name", yes[0], True)
+        active = DATABASE.get_table_data("sessions", "sessions_name", yes[0], all=True, order="sessions_name")
         if yes[1] == session:
             resp = make_response(render_template("post.html", 
                     var={
@@ -219,8 +219,8 @@ def login_on(session):
 # // buscando noticias no banco de dados....
 
 def query_news(category: str=None, title: str=None):
-    data = DATABASE.get_table_data("noticias", "titulo", title)
-    outer = DATABASE.get_table_data("noticias", "categoria", category, all=True)
+    data = DATABASE.get_table_data("noticias", "titulo", title, order="data")
+    outer = DATABASE.get_table_data("noticias", "categoria", category, all=True, order="data")
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
