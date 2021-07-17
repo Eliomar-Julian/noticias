@@ -67,7 +67,7 @@
     
 
 {#------------------ Mais noticias relacionadas ----------------------#}
-    <div>
+    <div class="container-fluid text-center">
         <h3 class="h3 text-center" style="margin-top: 10%; color: #ff6600; font-family: 'Staatliches', cursive;">Veja mais relacionados...</h3><hr>
         {% for tuples in var.outer %}
         {% if tuples[0] != var.id %}
@@ -94,10 +94,21 @@
         {% endif %}
         {% endfor %}
     </div>
+    <div id="comments" class="container">
+        <div id="fb-root"><h4 class="h4 text-danger text-center">Dê sua opnião <span id="respeito" class="text-info">mantenha o respeito nos comentários.</span></h4></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0" nonce="mMfPgfPS"></script>
+        <div class="fb-comments" data-href="https://www.sisalnews.com.br/{{ var.category }}/{{ var.title }}" data-width="" 
+            data-numposts="5" 	data-order-by="time">
+        </div>
+
+    </div>
     <style>
         [data-h2]{
             text-align: center;
             margin-top: 2%;
+        }
+        #respeito{
+            font-size: small;
         }
     </style>
 <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>  
