@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+{% block thumb %}
+    {% if var.photos[:4] != 'http'%}
+        <img src="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" alt="{{ var.photos }}" class="img-fluid thumbnail mx-auto" hidden>
+    {% else %}
+        <img src="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" alt="{{ var.photos }}" class="img-fluid thumbnail mx-auto" hidden>
+    {% endif %}
+{% endblock %}
 {% block body %}
 {#--------------------- renderiza as paginas clicadas ---------------------#}
     <title>{{ var.title }}</title>
