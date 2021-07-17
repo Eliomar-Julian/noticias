@@ -115,7 +115,7 @@ svgs[1].style.display = "none";
 btSearch.addEventListener("click", busca);
 function busca(){
     if(expand === false){
-        input.setAttribute("style", "visibility: visible; width: 100%;");
+        input.setAttribute("style", "visibility: visible; width: 50%;");
         svgs[0].style.display ="none";
         svgs[1].style.display = "block";
         expand = true;
