@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block thumb %}
-    <img src="{{ var.photos }}" alt="{{ var.photos }}" class="img-fluid thumbnail mx-auto" hidden>
+    <img src="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" alt="{{ var.photos }}" class="img-fluid thumbnail mx-auto" hidden>
 {% endblock %}
 {% block body %}
 {#--------------------- renderiza as paginas clicadas ---------------------#}
@@ -11,7 +11,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ var.title }}" />
     <meta property="og:description"   content="{{ var.sub }}" />
-    <meta property="og:image"         content="{{ url_for('static', filename='img/upload' + var.photos) }}" />
+    <meta property="og:image"         content="https://www.sisalnews.com.br/static/img/upload/{{ var.photos }}" />
     
 {#-------------------- Corpo da postagem ----------------------------------------#}
     <div class="posts">
@@ -28,19 +28,17 @@
             </div>
             <div id="share-div" class="container rounded">
                 {#----   -------- ---    facebook compartilhar-----------------------#}
-                <div class="container-fluid mx-auto">
-                    <div id="fb-root"></div>
-                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0" 
-                        nonce="GrpPCC1v">
-                    </script>
-                    <div class="fb-share-button" data-href="http://www.sisalnews.com.br/{{ var.category }}/{{ var.title }}" data-layout="button" 
-                        data-size="large">
-                            <a target="_blank" 
-                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" 
-                                class="fb-xfbml-parse-ignore">Compartilhar
-                            </a>
-                    </div>
-                </div>
+               <!-- Load Facebook SDK for JavaScript -->
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v11.0" nonce="ZxGzXhRO"></script>
+
+                <!-- Your share button code -->
+                <div class="fb-share-button" data-href="http://www.sisalnews.com.br/{{ var.category }}/{{ var.title }}" data-layout="button" data-size="large">
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sisalnews.com.br/{{ var.category }}/{{ var.title }}&amp;src=sdkpreparse" 
+                        class="fb-xfbml-parse-ignore">Compartilhar
+                    </a>
+            </div>
+
 
                 {#------------------ botão twitter----------------------------------#}
                 <div class="container-fluid mx-auto">
