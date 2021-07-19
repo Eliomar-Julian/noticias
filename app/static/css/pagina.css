@@ -28,3 +28,14 @@
     width: 40vw;
     height: auto;
 }
+[data-h2]{
+    text-align: center;
+    margin-top: 2%;
+}
+#respeito{
+    font-size: small;
+}
+[data-space]{
+    display: none;
+}
+
