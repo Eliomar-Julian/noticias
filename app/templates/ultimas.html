@@ -49,19 +49,19 @@
         {% for tuples in var %}
 		{% if loop.index > 4 and loop.index < 13 %}
                 {#<!------------  Demais posts para com thumbnail de link externo ---------------------#}
-                <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4 }}">
+                <a href="/{{ tuples.3 }}/{{ tuples.4 }}" title="{{ tuples.4|safe }}">
                     {% if tuples[6][:4] == 'http' %}
-                        <div data-sub="div" class="btn btn-outline-light">
-                            <img data-s class="rounded float-left" src="{{ tuples.6 }}" alt="">
-                            <h1 class="h6 text-secondary text-left" data-h2>{{ tuples.4|safe }}</h1>
+                        <div data-sub="div" class="container-fluid bg-light mx-auto">
+                            <img data-s class="rounded img-thumbnail img-fluid text-center" src="{{ tuples.6 }}" alt="">
+                            <h1 class="h6 text-secondary text-left" data-h2>{{ tuples.4[:80]|safe }}</h1>
                             <p data-data class="h6 text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
                             <p data-article="article" class="text-dark-lg text-center">{{ tuples.9[:75] }}</p>
                         </div>
                     {% else %}
                     {#<!------------- Demais posts para thumbnail interno--------------------------------->#}
-                    <div data-sub="div" class="btn btn-outline-light">
-                        <img data-s class="rounded float-left" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
-                        <h1 class="h6 text-secondary text-left" data-h2>{{ tuples[4]|safe }}</h1>
+                    <div data-sub="div" class="container-fluid bg-light mx-auto">
+                        <img data-s class="rounded img-thumbnail img-fluid text-center" src="{{ url_for('static', filename='img/upload/' + tuples.6) }}" alt="{{ tuples.6 }}">
+                        <h1 class="h6 text-secondary text-left" data-h2>{{ tuples.4[:80]|safe }}</h1>
                         <p data-data class="h6 text-center">{{ tuples[1][-2:] }}-{{ tuples[1][-5:-3] }}-{{ tuples[1][:-6] }}</p>
                         <p data-article="article" class="text-dark-lg text-center">{{ tuples.9[:75] }}...</p>
                     </div>

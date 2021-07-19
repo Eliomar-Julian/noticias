@@ -151,3 +151,18 @@ function aparece(){
         expandMore = false;
     }
 }
+
+
+// botão compartilhar
+
+function share(title, sub, url){
+    if (navigator.share !== undefined) {
+		navigator.share({
+			title: title,
+			text: sub,
+			url: 'https://' + url,
+		})
+		.then(() => console.log('Successful share'))
+		.catch((error) => console.log('Error sharing', error));
+	}
+}

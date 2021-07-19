@@ -29,7 +29,7 @@ def home_():
         cur = DATABASE.query_like(search)
         return render_template("search.html", var=cur.fetchall())
     cur = DATABASE.personal()
-    cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 24;")
+    cur.execute("SELECT * FROM noticias ORDER BY id DESC LIMIT 20;")
     return render_template("ultimas.html", var=cur.fetchall())
 
 
