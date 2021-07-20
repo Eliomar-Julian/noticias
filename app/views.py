@@ -41,7 +41,10 @@ def open_page_category(category):
         cur = DATABASE.query_like(search)
         return render_template("search.html", var=cur.fetchall())
     cur = DATABASE.personal()
-    cur.execute("SELECT * FROM noticias WHERE categoria = ? ORDER BY DATE(data) DESC;", [category,])
+    cur.execute(
+        """SELECT * FROM noticias WHERE categoria = ? 
+        ORDER BY DATE(data) DESC;""", [category,]
+    )
     return render_template("ultimas.html", var=cur.fetchall())
 
 
@@ -68,10 +71,17 @@ def login():
     user_cookie = request.cookies.get("FNAdmin")
     
     if user_cookie:
-        user_session_finnaly = generate_hash(user_session_prepare + user_cookie)
+        user_session_finnaly = generate_hash(
+                                user_session_prepare + user_cookie
+                            )
     else: 
         user_session_finnaly = generate_hash(user_session_prepare)
-    is_logon = DATABASE.get_table_data("sessions", "sessions_hash", user_session_finnaly, order="sessions_hash")
+    is_logon = DATABASE.get_table_data(
+                "sessions", 
+                "sessions_hash", 
+                user_session_finnaly, 
+                order="sessions_hash"
+            )
     
     if request.method == 'POST':
         name = request.form.get("user")
@@ -85,23 +95,23 @@ def login():
             return jsonify(message="errorName")
         elif pass_ != password:
             return jsonify(message="errorPassword")
-        elif user[1] == name and pass_ == password: # comparando user e senha...
-            DATABASE.insert_in_table("sessions", 
-                ["sessions_name", 
-                    "sessions_hash", 
-                    "sessions_permanent"], [
-                                            name, 
-                                            user_session_finnaly, 
-                                            expires
-                                        ]
+        elif user[1] == name and pass_ == password: 
+            # comparando user e senha...
+            DATABASE.insert_in_table(
+                "sessions", 
+                    ["sessions_name", "sessions_hash", "sessions_permanent"], 
+                    [name, user_session_finnaly, expires]
             )
             
             if expires == "true":             # verifica se a sessão expirará...
-                threading.Thread(target=expire, daemon=True, args=[user_session_finnaly]).start()
+                threading.Thread(
+                    target=expire, daemon=True, 
+                    args=[user_session_finnaly]).start()
             return jsonify(message="success", session=user_session_finnaly)
 
     try:
-        if user_session_finnaly == is_logon[1]: # verifica se ainda há uma sessão aberta
+        if user_session_finnaly == is_logon[1]: 
+            # verifica se ainda há uma sessão aberta
             return redirect("/admin/" + user_session_finnaly)
     except TypeError:
         return render_template("login.html")
@@ -110,11 +120,14 @@ def login():
 # // se logado renderiza a apagina de posts
 
 def login_on(session):
-    yes = DATABASE.get_table_data("sessions", "sessions_hash", session, order="sessions_hash")
+    yes = DATABASE.get_table_data(
+            "sessions", "sessions_hash", session, order="sessions_hash"
+        )
     cur = DATABASE.personal()
     data = cur.execute("SELECT * FROM noticias ORDER BY id DESC;")
     d = data.fetchall()
-    if request.method == "POST": # variaveis de inserção ao banco
+    if request.method == "POST": 
+        # variaveis de inserção ao banco
         exit_ = request.form.get("logoff")
         date = request.form.get("date")
         author = request.form.get("author")
@@ -131,116 +144,103 @@ def login_on(session):
         
         if code: 
             tmp = code; code = ""
-            for char in tmp.split(" "):
+            for char in tmp.split(" "): 
                 code += char.replace("\n", "") + " "
+        
         save_base = os.path.dirname(__file__)
         save_file = os.path.join(save_base, "static/img/upload")
         
-        if id_info: DATABASE.personal("DELETE FROM noticias WHERE id = ?;", [id_info,])
+        if id_info: 
+            DATABASE.personal(
+                "DELETE FROM noticias WHERE id = ?;", [id_info,]
+            )
         
-        try: # verificando se a imagem foi enviada e o nome do arquivo.
+        try: 
+            # verificando se a imagem foi enviada e o nome do arquivo.
             photo = photos.filename
             photos.save(f"{save_file}/{secure_filename(photo)}")
-        except : photo = link_image
+        except : 
+            photo = link_image
         
-        if exit_ == "exit": # se sair for clicado, se sim volta ao /admin
+        if exit_ == "exit": 
+            # se sair for clicado, se sim volta ao /admin
             DATABASE.delete_table("sessions", "sessions_hash", yes[1])
             return redirect("/admin")
-        elif exit_ == "exit-all": # deslogar todos os administradores
+        elif exit_ == "exit-all": 
+            # deslogar todos os administradores
             DATABASE.delete_all("sessions")
             return redirect("/admin") 
 
-        if title: # se o formulario de postagem estiver preenchido
+        if title: 
+            # se o formulario de postagem estiver preenchido
             if not id_: 
-                DATABASE.insert_in_table("noticias", 
-                    ("data", 
-                    "autor", 
-                    "categoria", 
-                    "titulo", 
-                    "materia", 
-                    "foto", 
-                    "creditos", 
-                    "codigo", 
-                    "sub_titulo"), (
-                        date, 
-                        author, 
-                        category, 
-                        title, 
-                        text, 
-                        photo, 
-                        credits_, 
-                        code, 
-                        sub_title
-                        )
+                DATABASE.insert_in_table(
+                    "noticias", 
+                        ("data", "autor", "categoria", "titulo", "materia", 
+                        "foto", "creditos", "codigo", "sub_titulo"), 
+                        (date, author, category, title, text, 
+                        photo, credits_, code, sub_title
                     )
+                )
             else:
                 cur = DATABASE.personal(
-                    """UPDATE noticias SET data = ?, 
-                    autor = ?, 
-                    categoria = ?, 
-                    titulo = ?,
-                    materia = ?, 
-                    foto = ?, 
-                    creditos = ?, 
-                    codigo = ?, 
-                    sub_titulo = ? WHERE id = ?;""", [
-                        date, 
-                        author, 
-                        category, 
-                        title, 
-                        text, 
-                        photo, 
-                        credits_, 
-                        code, 
-                        sub_title, 
-                        id_
-                    ]
-                )
+                        """UPDATE noticias SET data = ?, autor = ?, 
+                        categoria = ?, titulo = ?,materia = ?, foto = ?, 
+                        creditos = ?, codigo = ?, 
+                        sub_titulo = ? WHERE id = ?;""", 
+                        [   date, author, category, title, text, 
+                            photo, credits_, code, sub_title, id_
+                        ]
+                    )
             return redirect(f"/{category}/{title}")
     try:
-        active = DATABASE.get_table_data("sessions", "sessions_name", yes[0], all=True, order="sessions_name")
-        if yes[1] == session:
-            resp = make_response(render_template("post.html", 
-                    var={
-                        "session_name": yes[0], 
-                        "session_hash": yes[1], 
-                        "session_expire":yes[2],
-                        "session_actives": len(active),
-                        "session_data": d
-                    }
+        active = DATABASE.get_table_data(
+                    "sessions", "sessions_name", yes[0], 
+                    all=True, order="sessions_name"
                 )
-            )
+        if yes[1] == session:
+            resp = make_response(
+                        render_template(
+                            "post.html", var={
+                                            "session_name": yes[0], 
+                                            "session_hash": yes[1], 
+                                            "session_expire":yes[2],
+                                            "session_actives": len(active),
+                                            "session_data": d
+                                        }
+                        )
+                    )
             resp.set_cookie("FNAdmin", yes[0])
             return resp
     except Exception:
-        return '<h3 style="color: red;">Sessão expirada ou token invalido...</h3>'
+        return """
+        <h3 style="color: red;">
+        Sessão expirada ou token invalido...</h3>
+        """
 
 
 # // buscando noticias no banco de dados....
 
 def query_news(category: str=None, title: str=None):
-    data = DATABASE.get_table_data("noticias", "titulo", title, order="data")
-    outer = DATABASE.get_table_data("noticias", "categoria", category, all=True, order="data")
+    data = DATABASE.get_table_data(
+            "noticias", "titulo", title.replace('_', ' ', -1), order="data"
+        )
+    outer = DATABASE.get_table_data(
+            "noticias", "categoria", category, all=True, order="data"
+        )
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
         return render_template("search.html", var=cur.fetchall())
     try:
         return render_template(
-            "page.html", var={
-                "id": data[0], 
-                "date": data[1],
-                "author": data[2], 
-                "category": data[3], 
-                "title": data[4], 
-                "text": data[5],
-                "photos": data[6],
-                "credits": data[7],
-                "code": data[8],
-                "sub": data[9],
-                "outer": outer
-            }
-        )
+                "page.html", var={
+                    "id": data[0], "date": data[1],"author": data[2], 
+                    "category": data[3], "title": data[4], "text": data[5],
+                    "photos": data[6],"credits": data[7],"code": data[8],
+                    "sub": data[9],"outer": outer
+                    }
+                )
     except:
         return render_template("nada.html")
 

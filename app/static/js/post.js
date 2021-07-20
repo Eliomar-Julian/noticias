@@ -30,7 +30,6 @@ pst.addEventListener("click", (e) => {
     emptyText.replace(/\%/g, "&percnt;");
     title.value = title.value.replace(/\%/g, "&percnt;");
     texto.value = emptyText.replace(/\'/g, "&lsquo;");
-    
     pst.setAttribute("type", "submit");
 })
 
