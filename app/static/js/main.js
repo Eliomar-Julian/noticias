@@ -30,8 +30,7 @@ function roll(r){
         menu.setAttribute("class", "navbar navbar-expand-lg navbar-light");
         logo.setAttribute("style", "opacity: 100%; transition: 1s;");
         items.forEach(function reChangedColor(change){
-            change.setAttribute("class", "navbar-brand text-light")
-            //change.removeAttribute("style");
+            change.setAttribute("class", "navbar-brand text-light");
         })
     }
 }
@@ -154,8 +153,7 @@ function aparece(){
 
 
 // botão compartilhar
-
-function share(title, sub, url){
+function share(title, sub, url){ // botão geral
     if (navigator.share !== undefined) {
 		navigator.share({
 			title: title,
@@ -165,4 +163,12 @@ function share(title, sub, url){
 		.then(() => console.log('Successful share'))
 		.catch((error) => console.log('Error sharing', error));
 	}
+}
+
+function filtrar(btn, category, title){ // twitter
+    var t = title.replace(/ /g, '_');
+    console.log(t);
+    var href = `https://twitter.com/intent/tweet?original_referer=https://sisalnews.com.br
+                /${category}/${t}&text=${title}&via=JulianEliomar&url=https://sisalnews.com.br/${category}/${t}`;
+    btn.href = href;
 }
