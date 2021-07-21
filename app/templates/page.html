@@ -36,8 +36,8 @@
             </div>
             <div id="share-div" class="container-fluid rounded">
                 {#----   -------- ---    facebook compartilhar-----------------------#}
-                <div class="btn btn-outline-warning"><a href="https://www.facebook.com/sharer/sharer.php?u=http://sisalnews.com.br/{{ var.category }}/{{ var.title }}"><img  width="30" src="{{ url_for('static', filename='img/face.png')}}" class="img-fluid mx-auto"></a></div>
-                <div class="btn btn-outline-warning"><a onclick="filtrar(this, '{{ var.category }}','{{ var.title }}')"><img  width="30" src="{{ url_for('static', filename='img/twitter.png')}}" class="img-fluid mx-auto"></a></div>
+                <div class="btn btn-outline-warning"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://sisalnews.com.br/{{ var.category }}/{{ var.title }}"><img  width="30" src="{{ url_for('static', filename='img/face.png')}}" class="img-fluid mx-auto"></a></div>
+		<div class="btn btn-outline-warning"><a onclick="filtrar(this, '{{ var.category }}','{{ var.title }}')"><img  width="30" src="{{ url_for('static', filename='img/twitter.png')}}" class="img-fluid mx-auto"></a></div>
                 <div class="btn btn-outline-warning"><a href="https://api.whatsapp.com/send?text=http://sisalnews.com.br/{{ var.category }}/{{ var.title }}"><img  width="30" src="{{ url_for('static', filename='img/whatsapp.png')}}" class="img-fluid mx-auto"></a></div>
                 <div class="btn btn-outline-warning"><a onclick="share('{{ var.title }}', '{{ var.sub }}', 'sisalnews.com.br/{{ var.category }}/{{ var.title }}')">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30">
