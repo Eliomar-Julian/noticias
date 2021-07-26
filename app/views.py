@@ -9,21 +9,19 @@ import os
 from datetime import datetime
 
 
-# // instancia de acesso ao banco
-
-DATABASE = SQL()
+DATABASE = SQL() # // instancia de acesso ao banco
 
 
-# retorna a instancia de Flask
-
-def create_app():
-    app = Flask(__name__, static_folder="static", template_folder="templates")
+def create_app() -> Flask.wsgi_app:
+    app = Flask(
+        __name__, 
+        static_folder="static", 
+        template_folder="templates"
+    )
     return app
 
 
-# // pagina inicial
-
-def home_():
+def home_() -> render_template:
     search = request.args.get("search")
     if search:
         cur = DATABASE.query_like(search)
@@ -33,10 +31,9 @@ def home_():
     return render_template("ultimas.html", var=cur.fetchall())
 
 
-# // abre as paginas de categoria
-
-def open_page_category(category):
+def open_page_category(category: typing.AnyStr) -> render_template:
     search = request.args.get("search")
+    
     if search:
         cur = DATABASE.query_like(search)
         return render_template("search.html", var=cur.fetchall())
@@ -45,12 +42,14 @@ def open_page_category(category):
         """SELECT * FROM noticias WHERE categoria = ? 
         ORDER BY DATE(data) DESC;""", [category,]
     )
-    return render_template("ultimas.html", var=cur.fetchall())
+    category_valid = cur.fetchall()
+    
+    if len(category_valid) > 0:
+        return render_template("ultimas.html", var=category_valid)
+    return render_template("nada.html")
 
 
-# // função em thread que expira a sessão **precisa ser trabalhada**...
-
-def expire(args):
+def expire(args: typing.Hashable) -> DATABASE.delete_table:
     timer = 360
     for _ in range(timer): timer -= 1; sleep(1)
     DATABASE.delete_table("sessions", "sessions_hash", args)
